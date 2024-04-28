@@ -7,6 +7,8 @@
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
+ -- data base name freedomfear
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -37,11 +39,11 @@ CREATE TABLE `authentication` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reset_password`
+-- Table structure for table `forget_passwords`
 --
 
-CREATE TABLE `reset_password` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `forget_passwords` (
+  `userid` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `time` time NOT NULL
@@ -53,16 +55,57 @@ CREATE TABLE `reset_password` (
 -- Table structure for table `users`
 --
 
+
+
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `licensee` text NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `statue` tinyint(4) NOT NULL,
-  `privilege` int(11) NOT NULL,
-  `auth` tinyblob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+	`id` INT(255) NOT NULL AUTO_INCREMENT,
+	`firstname` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`lastname` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`age` INT(2) NOT NULL,
+	`country` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`username` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`email` VARCHAR(45) NOT NULL COLLATE 'utf8_general_ci',
+	`password` VARCHAR(40) NOT NULL COLLATE 'utf8_general_ci',
+	`active` INT(11) NOT NULL DEFAULT '0',
+	`macAddresses` VARCHAR(500) NOT NULL COLLATE 'utf8_general_ci',
+	`banned` INT(1) NOT NULL DEFAULT '0',
+	`ip` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
+    `licensee` TEXT NOT NULL,
+    `privilege` INT(11) NOT NULL,
+    `auth` TINYBLOB NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 COLLATE='utf8_general_ci';
+
+
+
+
+
+
+CREATE TABLE `activate` (
+	`userid` INT(11) NOT NULL,
+	`serial` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`userid`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `admins` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`password` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`email` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
+
+
+
 
 --
 -- Indexes for dumped tables
@@ -75,10 +118,10 @@ ALTER TABLE `authentication`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `reset_password`
+-- Indexes for table `forget_passwords`
 --
-ALTER TABLE `reset_password`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `forget_passwords`
+  ADD PRIMARY KEY (`userid`);
 
 --
 -- Indexes for table `users`
@@ -97,10 +140,10 @@ ALTER TABLE `authentication`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `reset_password`
+-- AUTO_INCREMENT for table `forget_passwords`
 --
-ALTER TABLE `reset_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `forget_passwords`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
