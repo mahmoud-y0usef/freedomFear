@@ -37,7 +37,9 @@
 
 <body>
 
-    <input id="toggle" type="checkbox">
+
+
+<input id="toggle" type="checkbox">
     <script type="text/javascript">
         document.getElementById("toggle").addEventListener("click", function () {
             document.getElementsByTagName('body')[0].classList.toggle("dark-theme");
@@ -62,50 +64,3 @@
 
     </div>
     <!-- Loader end-->
-
-
-
-    <div class="welcome-page">
-
-
-        <div class="uk-text-center" uk-grid>
-
-            <div class="uk-width-expand@m uk-visible@m page-first-screen">
-                <div class="fl-hd-cover"></div>
-                <div class="uk-card  uk-card-body "></div>
-            </div>
-            <div class="uk-width-expand@m">
-                <div class="form-login">
-                    <div class="form-login__social">
-                        <ul class="social">
-                            <li><a href="http://www.google.com/"><img src="assets/img/google.svg" alt="google"></a></li>
-                        </ul>
-                    </div>
-                    <div class="form-login__box">
-                        <div class="uk-heading-line uk-text-center"><span>or with Email</span></div>
-                        <form action="#!">
-                            <div class="uk-margin"><input class="uk-input" type="text" placeholder="Username"></div>
-                            <div class="uk-margin"><input class="uk-input" type="password" placeholder="Password"></div>
-                            <div class="uk-margin"><a class="uk-button uk-button-danger uk-width-1-1"
-                                    href="index.html">Log In</a>
-                            </div>
-                            <div class="uk-margin uk-text-center"><a href="forget-password.html">Forgotten password?</a>
-                            </div>
-                            <hr>
-                            <div class="uk-text-center"><span>Don’t have an account?</span><a
-                                    class="uk-margin-small-left" href="register.html">Register</a></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-    </div>
-
-
-</body>
-
-</html>

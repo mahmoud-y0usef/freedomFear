@@ -1,0 +1,48 @@
+
+
+<?php 
+    include 'inc/header.php';
+?>
+
+    <div class="welcome-page">
+
+
+        <div class="uk-text-center" uk-grid>
+
+            <div class="uk-width-expand@m uk-visible@m page-first-screen">
+                <div class="fl-hd-cover"></div>
+                <div class="uk-card  uk-card-body "></div>
+            </div>
+            <div class="uk-width-expand@m">
+                <div class="form-login">
+                    <div class="form-login__social">
+                        <ul class="social">
+                            <li><a href="http://www.google.com/"><img src="assets/img/google.svg" alt="google"></a></li>
+                        </ul>
+                    </div>
+                    <div class="form-login__box">
+                        <div class="uk-heading-line uk-text-center"><span>or with Email</span></div>
+                        <form action="function/login.php" method="post">
+                            <div class="uk-margin"><input class="uk-input" type="text" name="username_or_email" placeholder="Username" required></div>
+                            <div class="uk-margin"><input class="uk-input" type="password" name="password" placeholder="Password" required></div>
+                            <div class="uk-margin"><input class="uk-button uk-button-danger uk-width-1-1" name="login" type="submit" value="Log In">
+                            </div>
+                            <div class="uk-margin uk-text-center"><a href="forget-password.php">Forgotten password?</a>
+                            </div>
+                            <hr>
+                            <div class="uk-text-center"><span>Don’t have an account?</span><a
+                                    class="uk-margin-small-left" href="register.php">Register</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <?php 
+        include 'inc/footer.php';
+    ?>

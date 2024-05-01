@@ -1,172 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>Freedom Fear</title>
-    <meta content="Templines" name="author">
-    <meta content="TeamHost" name="description">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="format-detection" content="telephone=no">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/libs.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/fonts/simple-line-icons/css/simple-line-icons.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-
-    <script src="assets/js/libs.js"></script>
-    <script src="assets/js/main.js"></script>
+<?php 
+    include 'inc/header.php';
+    include 'inc/navbar.php';
+?>
 
 
-</head>
-
-
-<body class="page-community">
-
-    <input id="toggle" type="checkbox">
-    <script type="text/javascript">
-        document.getElementById("toggle").addEventListener("click", function () {
-            document.getElementsByTagName('body')[0].classList.toggle("dark-theme");
-        });
-
-    </script>
-
-    <!-- Loader-->
-    <div id="page-preloader">
-        <div class="preloader-1">
-            <div class="loader-text">Loading</div>
-            <span class="line line-1"></span>
-            <span class="line line-2"></span>
-            <span class="line line-3"></span>
-            <span class="line line-4"></span>
-            <span class="line line-5"></span>
-            <span class="line line-6"></span>
-            <span class="line line-7"></span>
-            <span class="line line-8"></span>
-            <span class="line line-9"></span>
-        </div>
-
-    </div>
-    <!-- Loader end-->
-
-
-    <div class="page-wrapper">
-        <header class="page-header">
-            <div class="page-header__inner">
-                <div class="page-header__sidebar">
-
-                    <div class="page-header__menu-btn">
-
-                        <button
-                            class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button menu-btn">
-                            <span class="toggle-menu-button-icon">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="page-header__logo"><img src="assets/img/logo.png" alt="logo"><span
-                            class="page-header__logo_text">Freedom Fear</span></div>
-                </div>
-                <div class="page-header__content">
-                    <div class="page-header__search">
-                        <div class="search">
-                            <!-- <div class="search__input"><i class="ico_search"></i><input type="search" name="search" placeholder="Search"></div>
-                                <div class="search__btn"><button type="button"><i class="ico_microphone"></i></button></div> -->
-
-                        </div>
-                    </div>
-                    <div class="page-header__action">
-
-                        <ul class="uk-subnav uk-nav-lang  uk-subnav-pill" uk-margin>
-
-                            <li>
-                                <a href="#">
-                                    <img src="assets/img/flags/united-kingdom.png" alt="profile" class="profile">
-                                    English
-                                    <span uk-icon="icon: triangle-down"></span>
-
-                                </a>
-                                <div uk-dropdown="mode: hover">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="#"> <img src="assets/img/flags/arabic.png" alt="profile"
-                                                    class="profile">Arabic</a></li>
-                                        <li><a href="#"> <img src="assets/img/flags/germany.png" alt="profile"
-                                                    class="profile">Germany</a></li>
-                                        <li><a href="#"> <img src="assets/img/flags/china.png" alt="profile"
-                                                    class="profile">China</a></li>
-                                        <li><a href="#"> <img src="assets/img/flags/India.png" alt="profile"
-                                                    class="profile">India</a></li>
-                                        <li><a href="#"> <img src="assets/img/flags/french.png" alt="profile"
-                                                    class="profile">French</a></li>
-
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
-
-
-                        <a class="action-btn" href="06_chats.html"><i class="ico_message"></i><span
-                                class="animation-ripple-delay1"></span></a>
-                        <a class="action-btn" href="07_friends.html"><i class="ico_notification"></i><span
-                                class="animation-ripple-delay2"></span></a>
-
-                        <ul class="uk-subnav uk-subnav-pill" uk-margin>
-
-                            <li>
-                                <a href="#">
-                                    <img src="assets/img/profile.png" alt="profile" class="profile">
-                                    Hi,Mahmoud
-                                    <span uk-icon="icon: triangle-down"></span></a>
-                                <div uk-dropdown="mode: click">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="#">My account</a></li>
-                                        <li><a href="#">My Password</a></li>
-                                        <li class="uk-nav-divider"></li>
-                                        <li><a href="#">Log Out</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
+ 
         <div class="page-content">
-            <aside class="sidebar" id="sidebar">
-
-                <div class="sidebar-hider">
-                    <i class="icon-arrow-left"></i>
-                    <i class="icon-arrow-right"></i>
-                </div>
-
-                <div class="sidebar-box">
-                    <ul class="uk-nav">
-                        <li class="uk-active"><a href="03_home.html"><i class="ico_home"></i><span>Home</span></a></li>
-                        <li class="uk-nav-header"><i class="uk-nav-devider"></i><span>Main</span></li>
-                        <li><a href="15_news.html"><i class="icon-feed"></i><span>News</span></a></li>
-                        <li><a href="11_market.html"><i class="ico_market"></i><span>Store</span></a></li>
-                        <li><a href="12_streams.html"><i class="ico_streams"></i><span>Streams</span></a></li>
-                        <li class="uk-nav-header"><i class="uk-nav-devider"></i><span>Support</span></li>
-                        <li><a href="#modal-report" data-uk-toggle><i class="ico_report"></i><span>Report</span></a>
-                        </li>
-                        <li><a href="#modal-help" data-uk-toggle><i class="ico_help"></i><span>Help</span></a></li>
-                    </ul>
-                </div>
-            </aside>
+            <?php 
+                include 'inc/sidebar.php';
+            ?>
 
 
             <main class="page-main">
@@ -179,7 +21,7 @@
                                     <div class="swiper-slide">
                                         <div class="recommend-slide">
                                             <div class="tour-slide__box">
-                                                <a href="#"><img src="assets/img/t1.jpg" alt="banner"></a>
+                                                <a href="#"><img src="../assets/img/t1.jpg" alt="banner"></a>
 
                                             </div>
                                         </div>
@@ -189,7 +31,7 @@
                                     <div class="swiper-slide">
                                         <div class="recommend-slide">
                                             <div class="tour-slide__box">
-                                                <a href="#"><img src="assets/img/t2.jpg" alt="banner"></a>
+                                                <a href="#"><img src="../assets/img/t2.jpg" alt="banner"></a>
 
 
                                             </div>
@@ -200,7 +42,7 @@
                                     <div class="swiper-slide">
                                         <div class="recommend-slide">
                                             <div class="tour-slide__box">
-                                                <a href="#"><img src="assets/img/t1.jpg" alt="banner"></a>
+                                                <a href="#"><img src="../assets/img/t1.jpg" alt="banner"></a>
 
                                             </div>
                                         </div>
@@ -210,7 +52,7 @@
                                     <div class="swiper-slide">
                                         <div class="recommend-slide">
                                             <div class="tour-slide__box">
-                                                <a href="#"><img src="assets/img/t2.jpg" alt="banner"></a>
+                                                <a href="#"><img src="../assets/img/t2.jpg" alt="banner"></a>
 
 
                                             </div>
@@ -241,7 +83,7 @@
                                         <div class="game-card --horizontal">
                                             <div class="game-card__box">
                                                 <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                            src="assets/img/trending2.jpg" alt="Alien Games" /></a>
+                                                            src="../assets/img/trending2.jpg" alt="Alien Games" /></a>
                                                 </div>
                                                 <div class="game-card__info"><a class="game-card__title"
                                                         href="10_game-profile.html"> Cyber Games</a>
@@ -259,7 +101,7 @@
                                         <div class="game-card --horizontal">
                                             <div class="game-card__box">
                                                 <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                            src="assets/img/trending3.jpg" alt="Warframe" /></a></div>
+                                                            src="../assets/img/trending3.jpg" alt="Warframe" /></a></div>
                                                 <div class="game-card__info"><a class="game-card__title"
                                                         href="10_game-profile.html">Game of Thrones</a>
                                                     <div class="game-card__genre">Warring factions have brought the
@@ -275,7 +117,7 @@
                                         <div class="game-card --horizontal">
                                             <div class="game-card__box">
                                                 <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                            src="assets/img/trending.jpg" alt="Warframe" /></a></div>
+                                                            src="../assets/img/trending.jpg" alt="Warframe" /></a></div>
                                                 <div class="game-card__info"><a class="game-card__title"
                                                         href="10_game-profile.html"> Historical Games</a>
                                                     <div class="game-card__genre">Warring factions have brought the
@@ -307,7 +149,7 @@
                                     <div class="swiper-slide">
                                         <div class="fl-gp-box">
                                             <div class="fl-cover-image">
-                                                <img alt="group" src="assets/img/gr1.jpg">
+                                                <img alt="group" src="../assets/img/gr1.jpg">
                                                 <div class="fl-gp-info-wrap">
                                                     <div class="fl-gp-info">
                                                         <div class="fl-gp-title"><a href="14_group.html"
@@ -319,7 +161,7 @@
                                                             class="item-avatar">
 
                                                             <img class="avatar" width="100" height="100"
-                                                                alt="Profile Photo" src="assets/img/user-1.png">
+                                                                alt="Profile Photo" src="../assets/img/user-1.png">
 
                                                         </a> </div>
                                                 </div>
@@ -341,7 +183,7 @@
                                     <div class="swiper-slide">
                                         <div class="fl-gp-box">
                                             <div class="fl-cover-image">
-                                                <img alt="group" src="assets/img/gr1.jpg">
+                                                <img alt="group" src="../assets/img/gr1.jpg">
                                                 <div class="fl-gp-info-wrap">
                                                     <div class="fl-gp-info">
                                                         <div class="fl-gp-title"><a href="14_group.html"
@@ -353,7 +195,7 @@
                                                             class="item-avatar">
 
                                                             <img class="avatar" width="100" height="100"
-                                                                alt="Profile Photo" src="assets/img/user-1.png">
+                                                                alt="Profile Photo" src="../assets/img/user-1.png">
 
                                                         </a> </div>
                                                 </div>
@@ -375,7 +217,7 @@
                                     <div class="swiper-slide">
                                         <div class="fl-gp-box">
                                             <div class="fl-cover-image">
-                                                <img alt="group" src="assets/img/gr1.jpg">
+                                                <img alt="group" src="../assets/img/gr1.jpg">
                                                 <div class="fl-gp-info-wrap">
                                                     <div class="fl-gp-info">
                                                         <div class="fl-gp-title"><a href="14_group.html"
@@ -387,7 +229,7 @@
                                                             class="item-avatar">
 
                                                             <img class="avatar" width="100" height="100"
-                                                                alt="Profile Photo" src="assets/img/user-1.png">
+                                                                alt="Profile Photo" src="../assets/img/user-1.png">
 
                                                         </a> </div>
                                                 </div>
@@ -409,7 +251,7 @@
                                     <div class="swiper-slide">
                                         <div class="fl-gp-box">
                                             <div class="fl-cover-image">
-                                                <img alt="group" src="assets/img/gr1.jpg">
+                                                <img alt="group" src="../assets/img/gr1.jpg">
                                                 <div class="fl-gp-info-wrap">
                                                     <div class="fl-gp-info">
                                                         <div class="fl-gp-title"><a href="14_group.html"
@@ -421,7 +263,7 @@
                                                             class="item-avatar">
 
                                                             <img class="avatar" width="100" height="100"
-                                                                alt="Profile Photo" src="assets/img/user-1.png">
+                                                                alt="Profile Photo" src="../assets/img/user-1.png">
 
                                                         </a> </div>
                                                 </div>
@@ -443,7 +285,7 @@
                                     <div class="swiper-slide">
                                         <div class="fl-gp-box">
                                             <div class="fl-cover-image">
-                                                <img alt="group" src="assets/img/gr1.jpg">
+                                                <img alt="group" src="../assets/img/gr1.jpg">
                                                 <div class="fl-gp-info-wrap">
                                                     <div class="fl-gp-info">
                                                         <div class="fl-gp-title"><a href="14_group.html"
@@ -455,7 +297,7 @@
                                                             class="item-avatar">
 
                                                             <img class="avatar" width="100" height="100"
-                                                                alt="Profile Photo" src="assets/img/user-1.png">
+                                                                alt="Profile Photo" src="../assets/img/user-1.png">
 
                                                         </a> </div>
                                                 </div>
@@ -510,7 +352,7 @@
                                         <div class="game-card">
                                             <div class="game-card__box">
                                                 <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                            src="assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
+                                                            src="../assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
                                                 </div>
                                                 <div class="game-card__info"><a class="game-card__title"
                                                         href="10_game-profile.html">t-shirt</a>
@@ -531,7 +373,7 @@
                                         <div class="game-card">
                                             <div class="game-card__box">
                                                 <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                            src="assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
+                                                            src="../assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
                                                 </div>
                                                 <div class="game-card__info"><a class="game-card__title"
                                                         href="10_game-profile.html">Pistol</a>
@@ -565,11 +407,11 @@
                             </div>
 
                             <img class="img_loaded" style="width: fit-content; height: 80%;"
-                                src="assets/img/slide/freedom_fear.png" />
-                            <img class="img_loaded" src="assets/img/slide/freedom_fear1.png" />
-                            <img class="img_loaded" src="assets/img/slide/freedom_fear2.png" />
-                            <img class="img_loaded" src="assets/img/slide/freedom_fear3.png" />
-                            <img class="img_loaded" src="assets/img/slide/freedom_fear4.png" />
+                                src="../assets/img/slide/freedom_fear.png" />
+                            <img class="img_loaded" src="../assets/img/slide/freedom_fear1.png" />
+                            <img class="img_loaded" src="../assets/img/slide/freedom_fear2.png" />
+                            <img class="img_loaded" src="../assets/img/slide/freedom_fear3.png" />
+                            <img class="img_loaded" src="../assets/img/slide/freedom_fear4.png" />
 
                             <div id="pagination">
                                 <button class="active" data-slide="0"></button>
@@ -600,63 +442,7 @@
     </div>
 
     <div class="page-modals">
-        <div class="uk-flex-top" id="modal-report" data-uk-modal>
-            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"><button class="uk-modal-close-default"
-                    type="button" data-uk-close></button>
-                <h2 class="uk-modal-title">Send Report</h2>
-                <form class="uk-form-stacked" action="#">
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Subject</div>
-                        <div class="uk-form-controls"><select class="js-select">
-                                <option value="">Choose Subject</option>
-                                <option value="Subject 1">Subject 1</option>
-                                <option value="Subject 2">Subject 2</option>
-                                <option value="Subject 3">Subject 3</option>
-                            </select></div>
-                    </div>
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Details</div>
-                        <div class="uk-form-controls"><textarea class="uk-textarea" name="details"
-                                placeholder="Try to include all details..."></textarea></div>
-                        <div class="uk-form-controls uk-margin-small-top">
-                            <div data-uk-form-custom><input type="file"><button class="uk-button uk-button-default"
-                                    type="button" tabindex="-1"><i class="ico_attach-circle"></i><span>Attach
-                                        File</span></button></div>
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <div class="uk-grid uk-flex-right fl-form-action" data-uk-grid>
-                            <div><button class="uk-button uk-button-small uk-button-link">Cancel</button></div>
-                            <div><button class="uk-button uk-button-small uk-button-danger">Submit</button></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="uk-flex-top" id="modal-help" data-uk-modal>
-            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"><button class="uk-modal-close-default"
-                    type="button" data-uk-close></button>
-                <h2 class="uk-modal-title">Help</h2>
-                <div class="search">
-                    <div class="search__input"><i class="ico_search"></i><input type="search" name="search"
-                            placeholder="Search"></div>
-                </div>
-                <div class="uk-margin-small-left uk-margin-small-bottom uk-margin-medium-top">
-                    <h4>Popular Q&A</h4>
-                    <ul>
-                        <li><img src="assets/img/svgico/clipboard-text.svg" alt="icon"><span>How to Upload Your
-                                Developed Game</span></li>
-                        <li><img src="assets/img/svgico/clipboard-text.svg" alt="icon"><span>How to Go Live
-                                Stream</span></li>
-                        <li><img src="assets/img/svgico/clipboard-text.svg" alt="icon"><span>Get in touch with the
-                                Creator Support Team</span></li>
-                    </ul>
-                    <ul>
-                        <li><a href="10_game-profile.html">browse all articles</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <?php include 'inc/modals.php'; ?>
     </div>
 </body>
 
