@@ -1,10 +1,21 @@
+
+<?php
+session_start();
+if (isset($_SESSION['user'])) {
+    header('Location: user/');
+}elseif (isset($_SESSION['admin'])) {
+    header('Location: admin/');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
     <meta charset="utf-8">
-    <title>Freedom Fear</title>
+    <title>Freedom Fear | <?php echo $title ?></title>
     <meta content="Templines" name="author">
     <meta content="TeamHost" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

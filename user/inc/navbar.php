@@ -69,14 +69,14 @@
                             <li>
                                 <a href="#">
                                     <img src="../assets/img/profile.png" alt="profile" class="profile">
-                                    Hi,Mahmoud
+                                    Hi, <?php echo $_SESSION['user']['firstname']." ".$_SESSION['user']['lastname']?>
                                     <span uk-icon="icon: triangle-down"></span></a>
                                 <div uk-dropdown="mode: click">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li><a href="#">My account</a></li>
                                         <li><a href="#">My Password</a></li>
                                         <li class="uk-nav-divider"></li>
-                                        <li><a href="#">Log Out</a></li>
+                                        <li><a href="function/logout.php">Log Out</a></li>
                                     </ul>
                                 </div>
                             </li>

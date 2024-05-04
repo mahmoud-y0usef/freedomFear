@@ -1,9 +1,17 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header('Location: ../');
+    }
+    include '../function/DB.php';
+    $db = new DB();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Freedom Fear</title>
+    <title>Freedom Fear | <?php echo $title ?></title>
     <meta content="Templines" name="author">
     <meta content="TeamHost" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,9 +1,9 @@
 <?php 
     
     $HOST = 'localhost';
-    $USER = 'root';
-    $PASSWORD = '';
-    $DBNAME = 'fr_fear_web';
+    $USER = 'freedom_1_phpma';
+    $PASSWORD = '23zRpCY3PotmS&ax';
+    $DBNAME = 'freedom_1_database';
 
     $conn =  mysqli_connect($HOST, $USER, $PASSWORD, $DBNAME);
 

@@ -9,11 +9,10 @@
         $user = $db->loginUser($username_or_email , $password);
         $admin = $db->loginAdmin($username_or_email , $password);
         if($user){
+            session_start();
             $_SESSION['user'] = $user;
-            // header('Location: index.php');
-            echo 'User login';
-            echo '<pre>';
-            print_r($user);
+            header('Location: ../user/');
+            
         }elseif($admin){
             $_SESSION['admin'] = $admin;
             // header('Location: admin/index.php');
@@ -24,4 +23,9 @@
             echo 'Invalid username or password';
         }
     }
+
+    // login with google
+    if(isset($_POST['google_login'])){
+       
+    }    
 ?>

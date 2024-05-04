@@ -1,6 +1,7 @@
 
 
 <?php 
+    $title = 'Login';
     include 'inc/header.php';
 ?>
 
@@ -23,7 +24,7 @@
                     <div class="form-login__box">
                         <div class="uk-heading-line uk-text-center"><span>or with Email</span></div>
                         <form action="function/login.php" method="post">
-                            <div class="uk-margin"><input class="uk-input" type="text" name="username_or_email" placeholder="Username" required></div>
+                            <div class="uk-margin"><input class="uk-input" type="text" name="username_or_email" placeholder="Username or Email" required></div>
                             <div class="uk-margin"><input class="uk-input" type="password" name="password" placeholder="Password" required></div>
                             <div class="uk-margin"><input class="uk-button uk-button-danger uk-width-1-1" name="login" type="submit" value="Log In">
                             </div>
