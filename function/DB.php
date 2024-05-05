@@ -27,9 +27,7 @@
             return $user;
         }
 
-        public function googleClient()
-
-        
+        public function loginAdmin()
         {
             return $this->login($username_or_email , $password , 'admins');
         }
