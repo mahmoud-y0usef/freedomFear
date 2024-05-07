@@ -2,7 +2,7 @@
 <?php 
     
     $HOST = 'localhost';
-    $USER = 'freedom_1_phpma';
+    $USER = 'freedom_1_database';
     $PASSWORD = 'DXSqiW!qO0Mr?d78';
     $DBNAME = 'freedom_1_database';
 
@@ -13,6 +13,5 @@
     }
 
     mysqli_set_charset($conn, 'utf8');
-
 
 ?>

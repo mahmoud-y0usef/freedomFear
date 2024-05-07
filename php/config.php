@@ -1,6 +1,6 @@
 <?php 
 $HOST = 'localhost';
-    $USER = 'freedom_1_phpma';
+    $USER = 'freedom_1_database';
     $PASSWORD = '23zRpCY3PotmS&ax';
     $DBNAME = 'freedom_1_database';
 
