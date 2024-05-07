@@ -16,13 +16,9 @@
             </div>
             <div class="uk-width-expand@m">
                 <div class="form-login">
-                    <div class="form-login__social">
-                        <ul class="social">
-                            <li><a href="http://www.google.com/"><img src="assets/img/google.svg" alt="google"></a></li>
-                        </ul>
-                    </div>
+                    
                     <div class="form-login__box">
-                        <div class="uk-heading-line uk-text-center"><span>or with Email</span></div>
+                        <div class="uk-heading-line uk-text-center"><span>Login</span></div>
                         <form action="function/login.php" method="post">
                             <div class="uk-margin"><input class="uk-input" type="text" name="username_or_email" placeholder="Username or Email" required></div>
                             <div class="uk-margin"><input class="uk-input" type="password" name="password" placeholder="Password" required></div>

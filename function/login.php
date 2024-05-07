@@ -23,9 +23,5 @@
             echo 'Invalid username or password';
         }
     }
-
-    // login with google
-    if(isset($_POST['google_login'])){
-       
-    }    
+    
 ?>

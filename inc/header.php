@@ -1,9 +1,9 @@
 
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] == 0) {
     header('Location: user/');
-}elseif (isset($_SESSION['admin'])) {
+}elseif (isset($_SESSION['admin']) && $_SESSION['admin']['privilege'] == 1) {
     header('Location: admin/');
 }
 

@@ -1,0 +1,28 @@
+<?php 
+    $title = 'Register';
+    include 'inc/header.php';
+?>
+    <div class="welcome-page">
+        <div class="uk-width-expand@m page-first-screen">
+            <div class="fl-hd-cover"></div>
+            <div class="form-login">
+                
+                <div class="form-login__box">
+                    <div class="uk-heading-line uk-text-center"><span>Register</span></div>
+                    <form action="function/register.php" method="post">
+                        <div class="uk-margin"><input class="uk-input" type="email" name="email" required placeholder="Email"></div>
+                        <div class="uk-margin"><input class="uk-input" type="text" name="username" required placeholder="Username"></div>
+                        <div class="uk-margin"><input class="uk-input" type="password" name="password" required placeholder="Password"></div>
+                        <div class="uk-margin"><button class="uk-button uk-button-danger uk-width-1-1"
+                                type="submit">Register</button></div>
+                        <div class="uk-text-center"><span>Already have an account?</span><a class="uk-margin-small-left"
+                                href="index.php">Log In</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php 
+    include 'inc/footer.php';
+?>

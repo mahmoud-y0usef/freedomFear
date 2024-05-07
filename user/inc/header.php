@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['user'])){
+    if(!isset($_SESSION['user'] ) && $_SESSION['user']['privilege'] != 0){
         header('Location: ../');
     }
     include '../function/DB.php';

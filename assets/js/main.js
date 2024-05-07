@@ -278,7 +278,7 @@ jQuery(document).ready(function ($) {
 });
 
 
-const displacementSlider = function(opts) {
+const displacementSlider = function (opts) {
 
     let vertex = `
         varying vec2 vUv;
@@ -327,7 +327,7 @@ const displacementSlider = function(opts) {
 
     let renderW, renderH;
 
-    if( renderWidth > canvasWidth ) {
+    if (renderWidth > canvasWidth) {
         renderW = renderWidth;
     } else {
         renderW = canvasWidth;
@@ -339,25 +339,25 @@ const displacementSlider = function(opts) {
         antialias: false,
     });
 
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setClearColor( 0x23272A, 1.0 );
-    renderer.setSize( renderW, renderH );
-    parent.appendChild( renderer.domElement );
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x23272A, 1.0);
+    renderer.setSize(renderW, renderH);
+    parent.appendChild(renderer.domElement);
 
     let loader = new THREE.TextureLoader();
-    loader.crossOrigin = "anonymous";
+    loader.crossOrigin = "anonymous";
 
-    images.forEach( ( img ) => {
+    images.forEach((img) => {
 
-        image = loader.load( img.getAttribute( 'src' ) + '?v=' + Date.now() );
+        image = loader.load(img.getAttribute('src') + '?v=' + Date.now());
         image.magFilter = image.minFilter = THREE.LinearFilter;
         image.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        sliderImages.push( image );
+        sliderImages.push(image);
 
     });
 
     let scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0x23272A );
+    scene.background = new THREE.Color(0x23272A);
     let camera = new THREE.OrthographicCamera(
         renderWidth / -2,
         renderWidth / 2,
@@ -390,28 +390,28 @@ const displacementSlider = function(opts) {
     object.position.set(0, 0, 0);
     scene.add(object);
 
-    let addEvents = function(){
+    let addEvents = function () {
 
         let pagButtons = Array.from(document.getElementById('pagination').querySelectorAll('button'));
         let isAnimating = false;
 
-        pagButtons.forEach( (el) => {
+        pagButtons.forEach((el) => {
 
-            el.addEventListener('click', function() {
+            el.addEventListener('click', function () {
 
-                if( !isAnimating ) {
+                if (!isAnimating) {
 
                     isAnimating = true;
 
                     document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
                     this.className = 'active';
 
-                    let slideId = parseInt( this.dataset.slide, 10 );
+                    let slideId = parseInt(this.dataset.slide, 10);
 
                     mat.uniforms.nextImage.value = sliderImages[slideId];
                     mat.uniforms.nextImage.needsUpdate = true;
 
-                    TweenLite.to( mat.uniforms.dispFactor, 1, {
+                    TweenLite.to(mat.uniforms.dispFactor, 1, {
                         value: 1,
                         ease: 'Expo.easeInOut',
                         onComplete: function () {
@@ -433,11 +433,11 @@ const displacementSlider = function(opts) {
 
     addEvents();
 
-    window.addEventListener( 'resize' , function(e) {
+    window.addEventListener('resize', function (e) {
         renderer.setSize(renderW, renderH);
     });
 
-    let animate = function() {
+    let animate = function () {
         requestAnimationFrame(animate);
 
         renderer.render(scene, camera);
@@ -445,7 +445,7 @@ const displacementSlider = function(opts) {
     animate();
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     imagesLoaded(document.querySelectorAll('.img_loaded'), () => {
         document.body.classList.remove('loading');
 
@@ -461,3 +461,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// function sendRequest() {
+//     console.log('clicked');
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('POST', 'function/login.php', true);
+//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     xhr.send('google_login');
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4 && xhr.status === 200) {
+//             console.log(xhr.responseText);
+//         }
+//     }
+// }
+
+   
+
