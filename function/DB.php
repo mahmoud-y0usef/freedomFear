@@ -1,5 +1,5 @@
 <?php 
-    require_once('connection.php');
+    require_once 'connection.php' ;
     class DB {
         
         private function login($username_or_email , $password , $table)
