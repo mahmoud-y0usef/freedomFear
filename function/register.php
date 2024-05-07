@@ -17,7 +17,7 @@ if(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password
         }else{
             $result = $db->register($email , $username , $password);
             if($result){
-                echo 'Register successfully';
+                header('Location: ../activate.php');
             }else{
                 echo 'Register failed';
             }
