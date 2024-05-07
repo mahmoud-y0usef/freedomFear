@@ -19,7 +19,7 @@ if(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password
             }else{
                 $result = $db->register($email , $username , $password);
                 if($result){
-                    header('Location: ../activate.php');
+                    echo "<script> window.location.href = '../activate.php' </script>";
                 }else{
                     echo 'Register failed';
                 }

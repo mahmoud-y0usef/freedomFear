@@ -58,7 +58,7 @@
 
 
 
-        public function loginAdmin()
+        public function loginAdmin($username_or_email , $password)
         {
             return $this->login($username_or_email , $password , 'admins');
         }
