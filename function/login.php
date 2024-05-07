@@ -1,5 +1,5 @@
 <?php 
-    require_once 'DB.php';
+    require_once('DB.php');
     $db = new DB();
      // user login or admin login
 
