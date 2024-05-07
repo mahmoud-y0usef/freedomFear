@@ -50,7 +50,7 @@
             $message.= "your email =".urlencode($email)."\n and your key= $activation";
             $sql = "INSERT INTO account (email , user , password , active) VALUES (? , ? , ? , ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sss', $email, $username, md5($password)  , $activation);
+            mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, md5($password)  , $activation);
             $result = mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             return $result;
