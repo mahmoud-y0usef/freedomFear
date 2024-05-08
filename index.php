@@ -16,7 +16,13 @@
             </div>
             <div class="uk-width-expand@m">
                 <div class="form-login">
-                    
+                    <?php 
+                        if(isset($_GET['error'])){
+                            echo '<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'.$_GET['error'].'</p></div>';
+                        }elseif(isset($_GET['success'])){
+                            echo '<div class="uk-alert-success" uk-alert><a class="uk-alert-close" uk-close></a><p>'.$_GET['success'].'</p></div>';
+                        }
+                    ?>
                     <div class="form-login__box">
                         <div class="uk-heading-line uk-text-center"><span>Login</span></div>
                         <form action="function/login.php" method="post">
