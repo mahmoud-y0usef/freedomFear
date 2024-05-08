@@ -50,7 +50,7 @@
                     <html>
                     <body>
                         To activate your account, please click on this link : <br>
-                        https://freedom-fear.com/activate.php <br>
+                        <a href='https://freedom-fear.com/activate.php' target='_blanc'>activate</a> <br>
                         your email = $email <br> and your key= $activation
                     </body>
                     </html>
