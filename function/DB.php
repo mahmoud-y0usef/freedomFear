@@ -45,9 +45,22 @@
         {
             global $conn;
             $activation = md5(uniqid(rand(), true));
-            $message = " To activate your account, please click on this link:\n\n";
-            $message .= 'https://freedom-fear.com/activate.php';
-            $message.= "your email =".urlencode($email)."\n and your key= $activation";
+            $subject = 'Registration Confirmation [freedom fear]';
+            $body = "
+                    <html>
+                    <body>
+                        To activate your account, please click on this link : <br>
+                        https://freedom-fear.com/activate.php <br>
+                        your email = $email <br> and your key= $activation
+                    </body>
+                    </html>
+                ";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= "From: <support@freedom-fear.com>" . "\r\n";
+            $recipientEmail = $email;
+            mail($recipientEmail, $subject, $body, $headers);
+
             $sql = "INSERT INTO account (email , user , password , active) VALUES (? , ? , ? , ?)";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, md5($password)  , $activation);
@@ -69,6 +82,27 @@
         }
 
 
+        public function activate($email , $activation)
+        {
+            global $conn;
+            $sql = "SELECT * FROM account WHERE email = ? AND active = ? AND activate = 0";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $user = mysqli_fetch_assoc($result);
+            mysqli_stmt_close($stmt);
+            if($user){
+                $sql = "UPDATE account SET activate = 1 WHERE email = ? AND active = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
+                $result = mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+                return $result;
+            }else{
+                return false;
+            }
+        }
 
     }
 ?>
