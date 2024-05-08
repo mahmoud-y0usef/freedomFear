@@ -18,7 +18,7 @@
             echo "<script> window.location.href = '../index.php?error=You are not an admin' </script>";
             exit;
         }
-        
+
         if($user){
             session_start();
             $_SESSION['user'] = $user;
@@ -31,7 +31,8 @@
             echo '<pre>';
             print_r($admin);
         }else{
-            echo 'Invalid username or password';
+            echo "<script> window.location.href = '../index.php?error=Invalid email or password' </script>";
+            exit;
         }
     }
     
