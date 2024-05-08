@@ -8,6 +8,17 @@
         $password = $_POST['password'];
         $user = $db->loginUser($username_or_email , $password);
         $admin = $db->loginAdmin($username_or_email , $password);
+
+        // validate email or username and password
+        if(empty($username_or_email) || empty($password)){
+            echo "<script> window.location.href = '../index.php?error=Please fill out the data' </script>";
+            exit;
+        }
+        if($admin[""] == 1){
+            echo "<script> window.location.href = '../index.php?error=You are not an admin' </script>";
+            exit;
+        }
+        
         if($user){
             session_start();
             $_SESSION['user'] = $user;
