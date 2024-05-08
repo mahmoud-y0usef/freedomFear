@@ -6,7 +6,9 @@ include 'inc/header.php';
     <div class="uk-width-expand@m page-first-screen">
        
         <div class="fl-hd-cover"></div>
-        <div class="form-login__box">
+        <div class="form-login
+            ">
+            <div class="form-login__box">
             <?php 
             if(isset($_GET['error'])){
                 echo '<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'.$_GET['error'].'</p></div>';
@@ -14,10 +16,9 @@ include 'inc/header.php';
                 echo '<div class="uk-alert-success" uk-alert><a class="uk-alert-close" uk-close></a><p>'.$_GET['success'].'</p></div>';
             }
         ?>
-        <div class="form-login
-            ">
-            
+        <br>
                 <div class="uk-heading
+                
                     -line uk-text-center"><span>Activate Account</span></div>
                     <br>
                 <form action="function/auth.php" method="post">
