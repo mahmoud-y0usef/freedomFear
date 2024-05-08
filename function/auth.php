@@ -1,5 +1,5 @@
 <?php 
-    if(isset($_POST['submit'])){
+    if(isset($_POST['email']) && isset($_POST['key'])){
         $email = $_POST['email'];
         $key = $_POST['key'];
         if(empty($email) || empty($key)){
