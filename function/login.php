@@ -20,6 +20,10 @@
         }
 
         if($user){
+            if($user['active'] == 0){
+                echo "<script> window.location.href = '../activate.php?error=Please check your email and activate your account' </script>";
+                exit;
+            }
             session_start();
             $_SESSION['user'] = $user;
             header('Location: ../user/');
