@@ -104,16 +104,17 @@
             }
         }
 
-        public function status($id)
+        public function status($id , $table)
         {
             global $conn;
-            $sql = "UPDATE account SET status = 1 WHERE id = ?";
+            $sql = "UPDATE $table SET status = 1 WHERE id = ?";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, 'i', $id);
             $result = mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             return $result;
         }
+
 
     }
 ?>
