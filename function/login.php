@@ -27,10 +27,12 @@
             session_start();
             $status = $db->status($user['id']);
             $_SESSION['user'] = $user;
+            $_SESSION['privilege'] = 0;
             echo "<script> window.location.href = '../index.php' </script>";
             
         }elseif($admin){
             $_SESSION['admin'] = $admin;
+            $_SESSION['privilege'] = 1;
             // header('Location: admin/index.php');
             echo 'Admin login';
             echo '<pre>';
