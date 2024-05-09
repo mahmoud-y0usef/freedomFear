@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['user'] ) && $_SESSION['user']['privilege'] != 0){
-        header('Location: ../');
+    if(!isset($_SESSION['user'] ) && ['privilege'] != 0){
+        echo "<script> window.location.href = '../index.php' </script>";
     }
     include '../function/DB.php';
     $db = new DB();
