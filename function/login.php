@@ -26,7 +26,7 @@
             session_start();
             $status = $db->status($user['id']);
             $_SESSION['user'] = $user;
-            header('Location: ../user/');
+            echo "<script> window.location.href = '../index.php' </script>";
             
         }elseif($admin){
             $_SESSION['admin'] = $admin;
@@ -41,5 +41,7 @@
     }else{
         echo "<script> window.location.href = '../index.php' </script>";
     }
+
+    
     
 ?>
