@@ -7,7 +7,7 @@
             global $conn;
             $sql = "SELECT * FROM $table WHERE (user = ? OR email = ?) AND password = ?";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sss', $username_or_email, $username_or_email, md5($password));
+            mysqli_stmt_bind_param($stmt, 'sss', $username_or_email, $username_or_email, $password);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             $user = mysqli_fetch_assoc($result);
@@ -102,6 +102,17 @@
             }else{
                 return false;
             }
+        }
+
+        public function status($id)
+        {
+            global $conn;
+            $sql = "UPDATE account SET status = 1 WHERE id = ?";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'i', $id);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            return $result;
         }
 
     }

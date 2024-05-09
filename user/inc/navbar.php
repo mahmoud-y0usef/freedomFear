@@ -69,7 +69,7 @@
                             <li>
                                 <a href="#">
                                     <img src="../assets/img/profile.png" alt="profile" class="profile">
-                                    Hi, <?php echo $_SESSION['user']['firstname']." ".$_SESSION['user']['lastname']?>
+                                    Hi, <?php echo $_SESSION['user']['user']?>
                                     <span uk-icon="icon: triangle-down"></span></a>
                                 <div uk-dropdown="mode: click">
                                     <ul class="uk-nav uk-dropdown-nav">

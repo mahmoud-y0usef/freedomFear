@@ -4,7 +4,7 @@
 
     if(isset($_POST['login'])){
         $username_or_email = $_POST['username_or_email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $user = $db->loginUser($username_or_email , $password);
         $admin = $db->loginAdmin($username_or_email , $password);
 
@@ -24,6 +24,7 @@
                 exit;
             }
             session_start();
+            $status = $db->status($user['id']);
             $_SESSION['user'] = $user;
             header('Location: ../user/');
             
@@ -37,6 +38,8 @@
             echo "<script> window.location.href = '../index.php?error=Invalid email or password' </script>";
             exit;
         }
+    }else{
+        echo "<script> window.location.href = '../index.php' </script>";
     }
     
 ?>
