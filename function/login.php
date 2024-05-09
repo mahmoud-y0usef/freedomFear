@@ -1,7 +1,6 @@
 <?php 
     require_once('DB.php');
     $db = new DB();
-     // user login or admin login
 
     if(isset($_POST['login'])){
         $username_or_email = $_POST['username_or_email'];
@@ -9,7 +8,7 @@
         $user = $db->loginUser($username_or_email , $password);
         $admin = $db->loginAdmin($username_or_email , $password);
 
-        // validate email or username and password
+        
         if(empty($username_or_email) || empty($password)){
             echo "<script> window.location.href = '../index.php?error=Please fill out the data' </script>";
             exit;
