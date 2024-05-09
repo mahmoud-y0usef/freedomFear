@@ -2,9 +2,9 @@
 <?php
 session_start();
 if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] == 0) {
-    header('Location: user/');
+    echo "<script> window.location.href = 'user/' </script>";
 }elseif (isset($_SESSION['admin']) && $_SESSION['admin']['privilege'] == 1) {
-    header('Location: admin/');
+    echo "<script> window.location.href = 'admin/' </script>";
 }
 
 ?>
