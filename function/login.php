@@ -28,7 +28,7 @@
             $_SESSION['user'] = $user;
             $_SESSION['privilege'] = 0;
             $status = $db->status($user['id'] , 'account');
-            echo "<script> window.location.href = '../index.php' </script>";
+            echo "<script> window.location.href = '../system/' </script>";
             
         }elseif($admin){
             $_SESSION['admin'] = $admin;
