@@ -30,8 +30,9 @@ if(isset($_POST['login'])){
             header('Location: ../admin/index.php');
             exit;
         }else{
-            header('Location: ../index.php?error=Invalid username or password');
-            exit;
+            echo "invalid pasword";
+            // header('Location: ../index.php?error=Invalid username or password');
+            // exit;
         }
     }
 }
