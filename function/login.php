@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
             if ($user['activate'] == 1) {
                 session_start();
                 $_SESSION['user'] = $user;
-                header('Location: ../index.php');
+                header('Location: ../user/');
                 exit;
             } else {
                 header('Location: ../index.php?error=Account not activated');
