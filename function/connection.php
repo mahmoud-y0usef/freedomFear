@@ -1,6 +1,6 @@
+<?php
+    ob_start(); // Start output buffering
 
-<?php 
-    
     $HOST = 'localhost';
     $USER = 'freedom_1_database';
     $PASSWORD = 'DXSqiW!qO0Mr?d78';
@@ -14,4 +14,6 @@
 
     mysqli_set_charset($conn, 'utf8');
 
+    // Clear output buffer before sending headers
+    ob_end_clean();
 ?>
