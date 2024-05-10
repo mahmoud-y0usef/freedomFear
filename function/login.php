@@ -1,51 +1,37 @@
 <?php
-   
-    require_once('DB.php');
-    $db = new DB();
 
-    if(isset($_POST['login'])){
-        $username_or_email = $_POST['username_or_email'];
-        $password = md5($_POST['password']);
-        $user = $db->loginUser($username_or_email , $password);
-        $admin = $db->loginAdmin($username_or_email , $password);
+require_once ('DB.php');
+$db = new DB();
 
-        if(empty($username_or_email) || empty($password)){
-            header("Location: ../index.php?error=Please fill out the data");
-            exit;
-        }
-        
-        if($admin[""] == 1){
-            header("Location: ../index.php?error=You are not an admin");
-            exit;
-        }
-
+if(isset($_POST['login'])){
+    $username_or_email = $_POST['username_or_email'];
+    $password = $_POST['password'];
+    if(empty($username_or_email) || empty($password)){
+        header('Location: ../index.php?error=Please fill out the data');
+        exit;
+    }else{
+        $username_or_email = filter_var($username_or_email, FILTER_SANITIZE_STRING);
+        $password = filter_var($password, FILTER_SANITIZE_STRING);
+        $user = $db->login($username_or_email, $password, 'account');
+        $admin = $db->login($username_or_email, $password, 'admins');
         if($user){
-            if($user['activate'] == 0){
-                header("Location: ../activate.php?error=Please check your email and activate your account");
+            if($user['activate'] == 1){
+                session_start();
+                $_SESSION['user'] = $user;
+                header('Location: ../index.php');
+                exit;
+            }else{
+                header('Location: ../index.php?error=Account not activated');
                 exit;
             }
-            $status = $db->status($user['id'] , 'account');
+        }else if($admin){
             session_start();
-            $_SESSION['user'] = $user;
-            $_SESSION['privilege'] = 0;
-            header("Location: ../user/");
+            $_SESSION['user'] = $admin;
+            header('Location: ../admin/index.php');
             exit;
-        }
-        elseif($admin){
-            session_start();
-            $_SESSION['admin'] = $admin;
-            $_SESSION['privilege'] = 1;
-            $status = $db->status($user['id'] , 'admins');
-            header("Location: ../admin/index.php");
-            exit;
-        }
-        else{
-            header("Location: ../index.php?error=Invalid email or password");
+        }else{
+            header('Location: ../index.php?error=Invalid username or password');
             exit;
         }
     }
-    else{
-        header("Location: ../index.php");
-        exit;
-    }
-?>
+}
