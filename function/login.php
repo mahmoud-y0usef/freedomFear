@@ -1,9 +1,5 @@
 <?php
-    // Start or resume session
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
+   
     require_once('DB.php');
     $db = new DB();
 
