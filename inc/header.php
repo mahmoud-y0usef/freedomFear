@@ -3,8 +3,12 @@
 session_start();
 if (isset($_SESSION['user'])) {
     header('Location: user/');
-}elseif (isset($_SESSION['admin'])) {
+    exit;
+}
+
+if (isset($_SESSION['admin'])) {
     header('Location: admin/');
+    exit;
 }
 
 ?>
