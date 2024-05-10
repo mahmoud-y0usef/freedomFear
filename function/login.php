@@ -24,14 +24,15 @@
                 header("Location: ../activate.php?error=Please check your email and activate your account");
                 exit;
             }
+            $status = $db->status($user['id'] , 'account');
             session_start();
             $_SESSION['user'] = $user;
             $_SESSION['privilege'] = 0;
-            $status = $db->status($user['id'] , 'account');
             header("Location: ../user/");
             exit;
         }
         elseif($admin){
+            session_start();
             $_SESSION['admin'] = $admin;
             $_SESSION['privilege'] = 1;
             $status = $db->status($user['id'] , 'admins');
