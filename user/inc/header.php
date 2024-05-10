@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(!isset($_SESSION['user'])){
-        echo "<script> window.location.href = '../index.php' </script>";
+        header('Location: ../index.php');
     }
     include '../function/DB.php';
     $db = new DB();
