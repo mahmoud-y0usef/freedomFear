@@ -1,9 +1,10 @@
 <?php 
+
     session_start();
     if(!isset($_SESSION['user'])){
         header('Location: ../index.php');
     }
-    include '../function/DB.php';
+    require_once '../function/DB.php';
     $db = new DB();
 ?>
 <!DOCTYPE html>
