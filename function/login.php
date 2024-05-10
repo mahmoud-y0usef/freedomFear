@@ -24,6 +24,7 @@
                 header("Location: ../activate.php?error=Please check your email and activate your account");
                 exit;
             }
+            session_start();
             $_SESSION['user'] = $user;
             $_SESSION['privilege'] = 0;
             $status = $db->status($user['id'] , 'account');
