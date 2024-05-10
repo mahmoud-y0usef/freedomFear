@@ -1,6 +1,7 @@
 <?php
 
-require_once ('DB.php');
+session_start();
+require_once  'DB.php';
 $db = new DB();
 
 if (isset($_POST['login'])) {
@@ -16,7 +17,6 @@ if (isset($_POST['login'])) {
         $admin = $db->login($username_or_email, $password, 'admins');
         if ($user) {
             if ($user['activate'] == 1) {
-                session_start();
                 $_SESSION['user'] = $user;
                 header('Location: ../user/');
                 exit;
@@ -26,7 +26,7 @@ if (isset($_POST['login'])) {
             }
         } else if ($admin) {
             session_start();
-            $_SESSION['user'] = $admin;
+            $_SESSION['admin'] = $admin;
             header('Location: ../admin/index.php');
             exit;
         } else {
