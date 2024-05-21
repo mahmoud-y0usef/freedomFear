@@ -105,10 +105,16 @@ class DB
                 mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
                 $result = mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
-                return true;
+                if ($result) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             } else {
                 return false;
             }
+
         } else {
             return false;
         }
