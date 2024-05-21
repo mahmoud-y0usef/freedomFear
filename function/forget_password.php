@@ -3,7 +3,6 @@ if (isset($_POST['send_email'])) {
     require_once 'DB.php';
     $db = new DB();
     $email = $_POST['email'];
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     if (empty($email)) {
         echo "<script> window.location.href = '../forget-password.php?error=Please fill out the data' </script>";
         exit;
