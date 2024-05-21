@@ -75,7 +75,13 @@ class DB
     public function rest_password($email)
     {
         global $conn;
-        $user = $this->get_user_by_email($email);
+        $sql = "SELECT * FROM account WHERE email = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
         if ($user) {
             $activation = md5(uniqid(rand(), true));
             $subject = 'Reset Password [freedom fear]';
