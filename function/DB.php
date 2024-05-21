@@ -16,7 +16,7 @@ class DB
         return $user;
 
     }
-   
+
 
     public function get_user_by_email($email)
     {
@@ -72,6 +72,38 @@ class DB
         return $result;
     }
 
+    public function rest_password($email)
+    {
+        global $conn;
+        $user = $this->get_user_by_email($email);
+        if ($user) {
+            $activation = md5(uniqid(rand(), true));
+            $subject = 'Reset Password [freedom fear]';
+            $body = "
+                    <html>
+                    <body>
+                        To reset your password, please click on this link : <br>
+                        <a href='https://freedom-fear.com/reset_password.php' target='_blanc'>reset password</a> <br>
+                        your email = $email <br> and your key= $activation
+                    </body>
+                    </html>
+                ";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= "From: <support@freedom-fear.com>" . "\r\n";
+            $recipientEmail = $email;
+            mail($recipientEmail, $subject, $body, $headers);
+            $sql = "INSERT INTO forget_passwords (email , code) VALUES (? , ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
 
     public function activate($email, $activation)
     {
@@ -95,12 +127,60 @@ class DB
         }
     }
 
+    public function update_active($email)
+    {
+        global $conn;
+        $sql = "UPDATE account SET active = null WHERE email = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
     public function status($id, $table)
     {
         global $conn;
         $sql = "UPDATE $table SET status = 1 WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
+
+    public function get_email_by_key($email, $key)
+    {
+        global $conn;
+        $sql = "SELECT * FROM forget_passwords WHERE email = ? AND code = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ss', $email, $key);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $user;
+    }
+
+
+    public function update_password($email, $password)
+    {
+        global $conn;
+        $sql = "UPDATE account SET password = ? WHERE email = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ss', md5($password), $email);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
+    public function delete_key($email)
+    {
+        global $conn;
+        $sql = "DELETE FROM forget_passwords WHERE email = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $email);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $result;

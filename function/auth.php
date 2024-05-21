@@ -15,6 +15,7 @@
                 if($user['active'] == $key){
                     $result = $db->activate($email , $key);
                     if($result){
+                        $db->update_active($email);
                         echo "<script> window.location.href = '../index.php?success=Account activated successfully' </script>";
                         exit;
                     }else{
