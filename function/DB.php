@@ -75,41 +75,74 @@ class DB
     public function rest_password($email)
     {
         global $conn;
+
+        // Prepare and execute the query to check if the email exists
         $sql = "SELECT * FROM account WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 's', $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $user = mysqli_fetch_assoc($result);
+        if (!$stmt = mysqli_prepare($conn, $sql)) {
+            error_log("MySQL prepare error: " . mysqli_error($conn));
+            return false;
+        }
+        if (!mysqli_stmt_bind_param($stmt, 's', $email)) {
+            error_log("MySQL bind param error: " . mysqli_stmt_error($stmt));
+            return false;
+        }
+        if (!mysqli_stmt_execute($stmt)) {
+            error_log("MySQL execute error: " . mysqli_stmt_error($stmt));
+            return false;
+        }
+        if (!$result = mysqli_stmt_get_result($stmt)) {
+            error_log("MySQL get result error: " . mysqli_stmt_error($stmt));
+            return false;
+        }
+        if (!$user = mysqli_fetch_assoc($result)) {
+            error_log("MySQL fetch assoc error: " . mysqli_stmt_error($stmt));
+            return false;
+        }
         mysqli_stmt_close($stmt);
+
+        // If the user exists, generate the activation code and send the email
         if ($user) {
             $activation = md5(uniqid(rand(), true));
             $subject = 'Reset Password [freedom fear]';
             $body = "
-                    <html>
-                    <body>
-                        To reset your password, please click on this link : <br>
-                        <a href='https://freedom-fear.com/reset_password.php' target='_blanc'>reset password</a> <br>
-                        your email = $email <br> and your key= $activation
-                    </body>
-                    </html>
-                ";
+            <html>
+            <body>
+                To reset your password, please click on this link : <br>
+                <a href='https://freedom-fear.com/reset_password.php' target='_blank'>reset password</a> <br>
+                Your email: $email <br> Your key: $activation
+            </body>
+            </html>
+        ";
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= "From: <support@freedom-fear.com>" . "\r\n";
-            $recipientEmail = $email;
-            mail($recipientEmail, $subject, $body, $headers);
-            $sql = "INSERT INTO forget_passwords (email , code) VALUES (? , ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
-            $result = mysqli_stmt_execute($stmt);
+
+            if (!mail($email, $subject, $body, $headers)) {
+                error_log("Failed to send email to $email");
+                return false;
+            }
+
+            // Insert the activation code into the forget_passwords table
+            $sql = "INSERT INTO forget_passwords (email, code) VALUES (?, ?)";
+            if (!$stmt = mysqli_prepare($conn, $sql)) {
+                error_log("MySQL prepare error: " . mysqli_error($conn));
+                return false;
+            }
+            if (!mysqli_stmt_bind_param($stmt, 'ss', $email, $activation)) {
+                error_log("MySQL bind param error: " . mysqli_stmt_error($stmt));
+                return false;
+            }
+            if (!mysqli_stmt_execute($stmt)) {
+                error_log("MySQL execute error: " . mysqli_stmt_error($stmt));
+                return false;
+            }
             mysqli_stmt_close($stmt);
-            return $result;
+            return true;
         } else {
+            error_log("User not found with email: $email");
             return false;
         }
     }
-
 
     public function activate($email, $activation)
     {

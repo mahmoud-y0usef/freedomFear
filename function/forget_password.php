@@ -8,11 +8,11 @@ if (isset($_POST['send_email'])) {
         exit;
     } else {
         $domain = explode('@', $email);
-        if ($domain[1] != 'gmail.com' && $domain[1] != 'yahoo.com' && $domain[1] != 'hotmail.com' && $domain[1] != 'outlook.com') {
+        $validDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com'];
+        if (!in_array($domain[1], $validDomains)) {
             echo "<script> window.location.href = '../forget-password.php?error=Invalid email domain' </script>";
             exit;
         } else {
-            
             $result = $db->rest_password($email);
             if ($result) {
                 echo "<script> window.location.href = '../reset_password.php?success=Email sent successfully' </script>";
@@ -21,8 +21,6 @@ if (isset($_POST['send_email'])) {
                 echo "<script> window.location.href = '../forget-password.php?error=Email sending failed' </script>";
                 exit;
             }
-
-
         }
     }
 }
