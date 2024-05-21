@@ -99,13 +99,16 @@ class DB
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= "From: <support@freedom-fear.com>" . "\r\n";
             $recipientEmail = $email;
-            mail($recipientEmail, $subject, $body, $headers);
-            $sql = "INSERT INTO forget_passwords (email , code) VALUES (? , ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
-            $result = mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            return $result;
+            if (mail($recipientEmail, $subject, $body, $headers)) {
+                $sql = "INSERT INTO forget_passwords (email , code) VALUES (? , ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
+                $result = mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
