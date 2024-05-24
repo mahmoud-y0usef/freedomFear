@@ -105,7 +105,7 @@ class DB
                 mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
                 $result = mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
-                
+
                 if ($result) {
                     return true;
                 } else {
@@ -203,6 +203,69 @@ class DB
         return $result;
     }
 
+    public function get_events()
+    {
+        // get all the data in table events
+        global $conn;
+        $sql = 'SELECT * FROM events';
+        $stmt = mysqli_prepare($conn, $sql);
 
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            $events = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            mysqli_stmt_close($stmt);
+            return $events;
+        } else {
+            // Handle error in statement preparation
+            return array();
+        }
+    }
+
+
+    public function get_community()
+    {
+        global $conn;
+        $sql = 'SELECT * FROM communities';
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            $events = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            mysqli_stmt_close($stmt);
+            return $events;
+        } else {
+            // Handle error in statement preparation
+            return array();
+        }
+
+    }
+
+
+
+    public function get_service()
+    {
+        global $conn;
+        $sql = "SELECT * FROM slides";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            $events = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            mysqli_stmt_close($stmt);
+            return $events;
+        } else {
+            // Handle error in statement preparation
+            return array();
+        }
+    }
 }
 ?>

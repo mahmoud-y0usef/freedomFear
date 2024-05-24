@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
         } else if ($admin) {
             session_start();
             $_SESSION['admin'] = $admin;
-            header('Location: ../admin/index.php');
+            header('Location: ../admin/');
             exit;
         } else {
             error_reporting(E_ALL | E_WARNING | E_NOTICE);
