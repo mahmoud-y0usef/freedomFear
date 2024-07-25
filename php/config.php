@@ -1,7 +1,7 @@
 <?php 
 $HOST = 'localhost';
     $USER = 'freedom_1_database';
-    $PASSWORD = '23zRpCY3PotmS&ax';
+    $PASSWORD = 'DXSqiW!qO0Mr?d78';
     $DBNAME = 'freedom_1_database';
 
     $conn =  mysqli_connect($HOST, $USER, $PASSWORD, $DBNAME);

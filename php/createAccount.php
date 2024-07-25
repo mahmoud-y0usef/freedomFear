@@ -45,6 +45,28 @@
 		// $mail->Body     = $message;
 
 		// $mail->Send();
+                $subject = 'FreeDomFear [Registration Confirmation]';
+
+                // Construct the email body
+                $body = "
+                    <html>
+                    <body>
+                       $message;
+                       
+                    </body>
+                    </html>
+                ";
+
+                // Set the email headers
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= "From: $store <support@freedom-fear.com>" . "\r\n";
+
+                // Set the recipient's email address
+                $recipientEmail = $email;
+
+                // Send the email
+                mail($recipientEmail, $subject, $body, $headers);
 
 		echo "true";
 	}

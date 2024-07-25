@@ -33,25 +33,30 @@
 
                 $message .= $password;
 
-		// $mail = new PHPMailer;
-		// $smtp_auth = $GLOBALS['smtp_auth'];
 
-		// if($smtp_auth){
-		// 	$mail->isSMTP();                                   
-		// 	$mail->Host = $GLOBALS['smtp_host'];
-		// 	$mail->SMTPAuth = true;                              
-		// 	$mail->Username = $GLOBALS['smtp_user'];                 
-		// 	$mail->Password = $GLOBALS['smtp_password'];                           
-		// 	$mail->SMTPSecure = "tls";                           
-		// 	$mail->Port = $GLOBALS['smtp_port'];     
-		// }
 
-		// $mail->setFrom($GLOBALS['smtp_user'], 'Support');
-		// $mail->addAddress($email);
-		// $mail->Subject  = 'Recover Password';
-		// $mail->Body     = $message;
+                $subject = 'FreeDomFear [Recover Password]';
 
-		// $mail->Send();
+                // Construct the email body
+                $body = "
+                    <html>
+                    <body>
+                       $message;
+                       
+                    </body>
+                    </html>
+                ";
+
+                // Set the email headers
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= "From: $store <support@freedom-fear.com>" . "\r\n";
+
+                // Set the recipient's email address
+                $recipientEmail = $email;
+
+                // Send the email
+                mail($recipientEmail, $subject, $body, $headers);
 
 		$q = "UPDATE account SET password = MD5('".$password."') WHERE(email ='$email')";
     		$result_activate_account = mysqli_query($db,$q);

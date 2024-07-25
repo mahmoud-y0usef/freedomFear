@@ -1,25 +1,21 @@
 <?php
-	require_once("config.php");
+    require("config.php");
 
-	$auth_host = $GLOBALS['auth_host'];
-	$auth_user = $GLOBALS['auth_user'];
-	$auth_pass = $GLOBALS['auth_pass'];
-	$auth_dbase = $GLOBALS['auth_dbase'];
-	
-	
-	$db = mysqli_connect($auth_host, $auth_user, $auth_pass,$auth_dbase) or die("Error " . mysqli_error($db));
-	
+    $user_name = mysqli_real_escape_string($conn,$_POST['name']);
+    $user_password = mysqli_real_escape_string($conn,$_POST['password']);
 
-	$user_name = mysqli_real_escape_string($db,$_POST['name']);
-	$user_password = mysqli_real_escape_string($db,$_POST['password']);
+    $sql = mysqli_query($conn,"SELECT * FROM account WHERE (user = '$user_name' AND password = MD5('".$user_password."')) AND active IS NULL");
+    $rows = mysqli_num_rows($sql);
 
-	$sql = mysqli_query($db,"SELECT * FROM account WHERE (user = '$user_name' AND password = MD5('".$user_password."')) AND active IS NULL");
-	$rows= mysqli_num_rows($sql);
-	if($rows > 0){
-		echo "true";
-	}else{
-		echo "false";
-	}
-	mysqli_close($db);
-	
-?> 
+    if($rows > 0){
+        // Fetching password from the database
+        $row = mysqli_fetch_assoc($sql);
+        $password_from_db = $row['password'];
+
+        // Returning password along with the response
+        echo json_encode(array("success" => true, "password" => $password_from_db));
+    } else {
+        echo json_encode(array("success" => false));
+    }
+    mysqli_close($conn);
+?>

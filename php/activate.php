@@ -44,15 +44,10 @@ body {
 </head>
 <body><?php
 
-	require_once("config.php");
+	require("config.php");
 
-	$auth_host = $GLOBALS['auth_host'];
-	$auth_user = $GLOBALS['auth_user'];
-	$auth_pass = $GLOBALS['auth_pass'];
-	$auth_dbase = $GLOBALS['auth_dbase'];
 
-	$db = mysqli_connect($auth_host, $auth_user, $auth_pass, $auth_dbase) or die (mysql_error());
-	//mysqli_select_db($db);
+	//mysqli_select_db($conn);
 
 	if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/', $_GET['email']))
 	{
@@ -67,17 +62,17 @@ body {
 	if (isset($email) && isset($key))
 	{
     		// Update the database to set the "activation" field to null
-   	 	$query_activate_account = "UPDATE account SET active=NULL WHERE(email ='$email' AND active='$key')LIMIT 1";
-    		$result_activate_account = mysqli_query($db, $query_activate_account) ;
+   	 	$query_activate_account = "UPDATE account SET active=NULL , activate = 1 WHERE(email ='$email' AND active='$key')LIMIT 1";
+    		$result_activate_account = mysqli_query($conn, $query_activate_account) ;
 
     		// Print a customized message:
-    		if (mysqli_affected_rows($db) == 1)//if update query was successfull
+    		if (mysqli_affected_rows($conn) == 1)//if update query was successfull
     		{
     			echo '<div class="success">Your account is now active.</div>';
     		} else {
         		echo '<div class="errormsgbox">Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
     		}
-    		mysqli_close($db);
+    		mysqli_close($conn);
 	} else {
        	 	echo '<div class="errormsgbox">Error Occured .</div>';
 	}
