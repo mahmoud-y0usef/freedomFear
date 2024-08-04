@@ -267,5 +267,46 @@ class DB
             return array();
         }
     }
+
+    public function select_subjects()
+    {
+        global $conn;
+        $sql = "SELECT * FROM sup";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $events = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $events;
+        } else {
+            return array();
+        }
+    }
+
+
+    public function send_report($email, $subject, $details, $file)
+    {
+        global $conn;
+        $sql = "INSERT INTO reports (email, subject, details, file) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+    
+        if ($stmt) {
+            // Bind the parameters
+            mysqli_stmt_bind_param($stmt, 'ssss', $email, $subject, $details, $file);
+            
+            // Execute the statement
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                return true; // Report successfully sent
+            } else {
+                mysqli_stmt_close($stmt);
+                return false; // Failed to execute statement
+            }
+        } else {
+            return false; // Failed to prepare statement
+        }
+    }
+    
 }
 ?>

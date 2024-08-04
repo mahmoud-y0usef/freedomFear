@@ -1541,6 +1541,9 @@ html .uk-form-icon:not(.uk-form-icon-flip)~.uk-input {
     color: #F46119;
 }
 
+body.dark-theme .uk-subnav>*> :first-child:hover {
+    background: black;
+}
 .uk-subnav-pill>.uk-active>a {
     background: #000;
     color: #fff;
@@ -4870,7 +4873,7 @@ body.dark-theme .uk-subnav-pill>.uk-active>a {
 }
 
 body.dark-theme .uk-subnav-pill>*> :first-child {
-    color: #0C1826;
+    color: white;
 }
 
 body.dark-theme .uk-modal-dialog {

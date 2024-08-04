@@ -20,6 +20,13 @@ $slides = $db->get_service();
 
 
     <main class="page-main">
+
+        <?php 
+            if(isset($_GET['success'])){
+                echo '<div class="uk-alert-success" data-uk-alert><a class="uk-alert-close" data-uk-close></a><p>' . $_GET['success'] . '</p></div>';
+            }
+        ?>
+
         <div class="uk-grid" data-uk-grid>
             <div class="uk-width-2-3@l uk-width-3-3@m uk-width-3-3@s">
                 <h3 class="uk-text-lead">Recommended Events</h3>
