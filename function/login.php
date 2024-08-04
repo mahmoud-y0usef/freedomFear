@@ -22,6 +22,7 @@ if (isset($_POST['login'])) {
         if ($user) {
             if ($user['activate'] == 1) {
                 $_SESSION['user'] = $user;
+                $db->status($user['id'] ,'account' , 1);
                 header('Location: ../user/');
                 exit;
             } else {

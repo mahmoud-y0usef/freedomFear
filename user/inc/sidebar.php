@@ -6,9 +6,10 @@
 
         <div class="sidebar-box">
             <ul class="uk-nav">
-                <li class="uk-active"><a href="03_home.html"><i class="ico_home"></i><span>Home</span></a></li>
+                <li class="uk-active"><a href="../"><i class="ico_home"></i><span>Home</span></a></li>
                 <li class="uk-nav-header"><i class="uk-nav-devider"></i><span>Main</span></li>
                 <li><a href="15_news.html"><i class="icon-feed"></i><span>News</span></a></li>
+                <li><a href="wallet.php"><i class="icon-wallet"></i><span>Wallet</span></a></li>
                 <li><a href="11_market.html"><i class="ico_market"></i><span>Store</span></a></li>
                 <li><a href="12_streams.html"><i class="ico_streams"></i><span>Streams</span></a></li>
                 <li class="uk-nav-header"><i class="uk-nav-devider"></i><span>Support</span></li>

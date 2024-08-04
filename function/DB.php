@@ -155,10 +155,10 @@ class DB
         return $result;
     }
 
-    public function status($id, $table)
+    public function status($id, $table , $status)
     {
         global $conn;
-        $sql = "UPDATE $table SET status = 1 WHERE id = ?";
+        $sql = "UPDATE $table SET status = $status WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $id);
         $result = mysqli_stmt_execute($stmt);
@@ -290,11 +290,11 @@ class DB
         global $conn;
         $sql = "INSERT INTO reports (email, subject, details, file) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
-    
+
         if ($stmt) {
             // Bind the parameters
             mysqli_stmt_bind_param($stmt, 'ssss', $email, $subject, $details, $file);
-            
+
             // Execute the statement
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_close($stmt);
@@ -307,6 +307,23 @@ class DB
             return false; // Failed to prepare statement
         }
     }
-    
+
+    public function select_charges()
+    {
+        global $conn;
+        $sql = 'SELECT * FROM charges';
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $charges = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $charges;
+        } else {
+            return false;
+        }
+
+    }
+
 }
 ?>
