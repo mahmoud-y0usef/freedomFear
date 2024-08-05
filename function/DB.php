@@ -155,7 +155,7 @@ class DB
         return $result;
     }
 
-    public function status($id, $table , $status)
+    public function status($id, $table, $status)
     {
         global $conn;
         $sql = "UPDATE $table SET status = $status WHERE id = ?";
@@ -324,6 +324,21 @@ class DB
         }
 
     }
+
+
+    public function select_charge_by_id($charge_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM charges WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $charge_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $charge = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $charge;
+    }
+
 
 }
 ?>
