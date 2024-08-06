@@ -1,11 +1,11 @@
-<?php 
+<?php
 
-    session_start();
-    if(!isset($_SESSION['user'])){
-        header('Location: ../index.php');
-    }
-    require_once '../function/DB.php';
-    $db = new DB();
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: ../index.php');
+}
+require_once '../function/DB.php';
+$db = new DB();
 ?>
 <!DOCTYPE html>
 <html lang="en">
