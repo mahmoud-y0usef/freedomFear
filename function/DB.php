@@ -1,14 +1,19 @@
 <?php
 require_once 'connection.php';
+require '../Php/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class DB
 {
 
     public function login($username_or_email, $password, $table)
     {
         global $conn;
-        $sql = "SELECT * FROM $table WHERE (email = ? OR user = ?) AND password = ?";
+        $sql = "SELECT * FROM $table WHERE (email = ? OR name = ?) AND password = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'sss', $username_or_email, $username_or_email, md5($password));
+        $hashed_password = md5($password);
+        mysqli_stmt_bind_param($stmt, 'sss', $username_or_email, $username_or_email, $hashed_password);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
@@ -21,7 +26,7 @@ class DB
     public function get_user_by_email($email)
     {
         global $conn;
-        $sql = "SELECT * FROM account WHERE email = ?";
+        $sql = "SELECT * FROM bl_game_users WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $email);
         mysqli_stmt_execute($stmt);
@@ -34,7 +39,7 @@ class DB
     public function get_user_by_username($username)
     {
         global $conn;
-        $sql = "SELECT * FROM account WHERE user = ?";
+        $sql = "SELECT * FROM bl_game_users WHERE name = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $username);
         mysqli_stmt_execute($stmt);
@@ -48,74 +53,120 @@ class DB
     {
         global $conn;
         $activation = md5(uniqid(rand(), true));
-        $subject = 'Registration Confirmation [freedom fear]';
+        $subject = 'Registration Confirmation [Freedom Fear]';
         $body = "
-                    <html>
-                    <body>
-                        To activate your account, please click on this link : <br>
-                        <a href='https://freedom-fear.com/activate.php' target='_blanc'>activate</a> <br>
-                        your email = $email <br> and your key= $activation
-                    </body>
-                    </html>
-                ";
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: <support@freedom-fear.com>" . "\r\n";
-        $recipientEmail = $email;
-        mail($recipientEmail, $subject, $body, $headers);
+        <html>
+        <body>
+            To activate your account, please click on this link:<br>
+            <a href='https://freedom-fear.com/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
+            Your email: $email<br> 
+            Your activation key: $activation
+        </body>
+        </html>
+        ";
 
-        $sql = "INSERT INTO account (email , user , password , active) VALUES (? , ? , ? , ?)";
+        // Initialize PHPMailer and configure SMTP settings
+        $mail = new PHPMailer(true);
+
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = 'titan.rar-it.net'; // Replace with your SMTP server
+            $mail->SMTPAuth = true;
+            $mail->Username = 'support@freedom-fear.com'; // Replace with your SMTP username
+            $mail->Password = 'xSUe,R9H9q.*5Mk_'; // Replace with your SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
+            $mail->Port = 465; // SMTP port (use 465 for SSL, 587 for TLS)
+
+            // Recipients
+            $mail->setFrom('support@freedom-fear.com', 'Freedom Fear Support');
+            $mail->addAddress($email, $username);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+
+            // Send the email
+            $mail->send();
+            echo 'Confirmation email has been sent.';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+        // Save user to the database
+        $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, md5($password), $activation);
+        $hashed_password = md5($password);
+        mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, $hashed_password, $activation);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
+
         return $result;
     }
 
     public function rest_password($email)
     {
         global $conn;
-        $sql = "SELECT * FROM account WHERE email = ?";
+        $sql = "SELECT * FROM bl_game_users WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
+
         if ($user) {
-            global $conn;
             $activation = md5(uniqid(rand(), true));
-            $subject = 'Rest Password [freedom fear]';
+            $subject = 'Reset Password [Freedom Fear]';
             $body = "
-                    <html>
-                    <body>
-                        To activate your account, please click on this link : <br>
-                        <a href='https://freedom-fear.com/reset_password' target='_blanc'>Rest Password</a> <br>
-                        your email = $email <br> and your key= $activation
-                    </body>
-                    </html>
-                ";
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= "From: <support@freedom-fear.com>" . "\r\n";
-            $recipientEmail = $email;
-            if (mail($recipientEmail, $subject, $body, $headers)) {
-                $sql = "INSERT INTO forget_passwords (email , code) VALUES (? , ?)";
+                <html>
+                <body>
+                    To reset your password, please click on this link:<br>
+                    <a href='https://freedom-fear.com/reset_password?email=$email&key=$activation' target='_blank'>Reset Password</a><br>
+                    Your email: $email<br>
+                    Your reset key: $activation
+                </body>
+                </html>
+            ";
+
+            // Initialize PHPMailer and configure SMTP settings
+            $mail = new PHPMailer(true);
+
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host = 'titan.rar-it.net'; // Replace with your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'support@freedom-fear.com'; // Replace with your SMTP username
+                $mail->Password = 'xSUe,R9H9q.*5Mk_'; // Replace with your SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
+                $mail->Port = 465; // SMTP port (use 465 for SSL, 587 for TLS)
+
+                // Recipients
+                $mail->setFrom('support@freedom-fear.com', 'Freedom Fear Support');
+                $mail->addAddress($email);
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = $subject;
+                $mail->Body = $body;
+
+                // Send the email
+                $mail->send();
+
+                // Save the reset key in the forget_passwords table
+                $sql = "INSERT INTO forget_passwords (email, code) VALUES (?, ?)";
                 $stmt = mysqli_prepare($conn, $sql);
                 mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
                 $result = mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
 
-                if ($result) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            } else {
+                return $result;
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 return false;
             }
-
         } else {
             return false;
         }
@@ -125,7 +176,7 @@ class DB
     public function activate($email, $activation)
     {
         global $conn;
-        $sql = "SELECT * FROM account WHERE email = ? AND active = ? AND activate = 0";
+        $sql = "SELECT * FROM bl_game_users WHERE email = ? AND code = ? AND active = 0";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
         mysqli_stmt_execute($stmt);
@@ -133,7 +184,7 @@ class DB
         $user = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
         if ($user) {
-            $sql = "UPDATE account SET activate = 1 WHERE email = ? AND active = ?";
+            $sql = "UPDATE bl_game_users SET active = 1 WHERE email = ? AND code = ?";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
             $result = mysqli_stmt_execute($stmt);
@@ -147,7 +198,7 @@ class DB
     public function update_active($email)
     {
         global $conn;
-        $sql = "UPDATE account SET active = null WHERE email = ?";
+        $sql = "UPDATE bl_game_users SET code = null WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $email);
         $result = mysqli_stmt_execute($stmt);
@@ -184,9 +235,10 @@ class DB
     public function update_password($email, $password)
     {
         global $conn;
-        $sql = "UPDATE account SET password = ? WHERE email = ?";
+        $sql = "UPDATE bl_game_users SET password = ? WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ss', md5($password), $email);
+        $hashed_password = md5($password);
+        mysqli_stmt_bind_param($stmt, 'ss', $hashed_password, $email);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $result;

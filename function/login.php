@@ -16,13 +16,13 @@ if (isset($_POST['login'])) {
         $username_or_email = filter_var($username_or_email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $user = $db->login($username_or_email, $password, 'account');
+        $user = $db->login($username_or_email, $password, 'bl_game_users');
         $admin = $db->login($username_or_email, $password, 'admins');
 
         if ($user) {
-            if ($user['activate'] == 1) {
+            if ($user['active'] == 1 && $user['verify'] == 'done') {
                 $_SESSION['user'] = $user;
-                $db->status($user['id'] ,'account' , 1);
+                $db->status($user['id'] ,'bl_game_users' , 1);
                 header('Location: ../user/');
                 exit;
             } else {
