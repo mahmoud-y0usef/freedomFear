@@ -58,15 +58,15 @@ class DB
         $activation = md5(uniqid(rand(), true));
         $subject = 'Registration Confirmation [Freedom Fear]';
         $body = "
-            <html>
-            <body>
-                To activate your account, please click on this link:<br>
-                <a href='https://freedom-fear.com/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
-                Your email: $email<br> 
-                Your activation key: $activation
-            </body>
-            </html>
-        ";
+        <html>
+        <body>
+            To activate your account, please click on this link:<br>
+            <a href='https://freedom-fear.com/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
+            Your email: $email<br> 
+            Your activation key: $activation
+        </body>
+        </html>
+    ";
 
         // Initialize PHPMailer and configure SMTP settings
         $mail = new PHPMailer(true);
@@ -100,7 +100,7 @@ class DB
         }
 
         // Attempt to save user to the database
-        $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ? , ?)";
+        $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt === false) {
             error_log("MySQL Error: " . mysqli_error($conn));
@@ -108,7 +108,7 @@ class DB
         }
 
         $hashed_password = md5($password);
-        mysqli_stmt_bind_param($stmt, 'sssss', $email, $username, $hashed_password, $activation);
+        mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, $hashed_password, $activation);
         $result = mysqli_stmt_execute($stmt);
         if ($result === false) {
             error_log("MySQL Execution Error: " . mysqli_stmt_error($stmt));
