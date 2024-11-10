@@ -35,7 +35,7 @@
     </div>
 
 <!-- Include the reCAPTCHA script -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv"></script>
 <?php 
     include 'inc/footer.php';
 ?>
