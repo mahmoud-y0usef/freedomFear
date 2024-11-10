@@ -12,7 +12,7 @@
             $db = new DB();
             $user = $db->get_user_by_email($email);
             if($user){
-                if($user['active'] == $key){
+                if($user['code'] == $key){
                     $result = $db->activate($email , $key);
                     if($result){
                         $db->update_active($email);
