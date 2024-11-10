@@ -100,7 +100,7 @@ class DB
         }
 
         // Attempt to save user to the database
-        $sql = "INSERT INTO bl_game_users (email, name, password, code , verify) VALUES (?, ?, ?, ? , ?)";
+        $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ? , ?)";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt === false) {
             error_log("MySQL Error: " . mysqli_error($conn));
@@ -108,7 +108,7 @@ class DB
         }
 
         $hashed_password = md5($password);
-        mysqli_stmt_bind_param($stmt, 'sssss', $email, $username, $hashed_password, $activation, 'done');
+        mysqli_stmt_bind_param($stmt, 'sssss', $email, $username, $hashed_password, $activation);
         $result = mysqli_stmt_execute($stmt);
         if ($result === false) {
             error_log("MySQL Execution Error: " . mysqli_stmt_error($stmt));
@@ -203,7 +203,7 @@ class DB
         $user = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
         if ($user) {
-            $sql = "UPDATE bl_game_users SET active = 1 WHERE email = ? AND code = ?";
+            $sql = "UPDATE bl_game_users SET active = 1 WHERE email = ? AND code = ? AND verify = 'done'";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
             $result = mysqli_stmt_execute($stmt);
