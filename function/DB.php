@@ -61,29 +61,29 @@ class DB
         $activation = md5(uniqid(rand(), true));
         $subject = 'Registration Confirmation [Freedom Fear]';
         $body = "
-        <html>
-        <body>
-            To activate your account, please click on this link:<br>
-            <a href='https://freedom-fear.com/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
-            Your email: $email<br> 
-            Your activation key: $activation
-        </body>
-        </html>
-    ";
+            <html>
+            <body>
+                To activate your account, please click on this link:<br>
+                <a href='https://freedom-fear.com/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
+                Your email: $email<br> 
+                Your activation key: $activation
+            </body>
+            </html>
+        ";
 
         // Initialize PHPMailer and configure SMTP settings
         $mail = new PHPMailer(true);
-        $emailSent = false; // Track email success
+        $emailSent = false;
 
         try {
             // Server settings
             $mail->isSMTP();
-            $mail->Host = 'titan.rar-it.net'; // Replace with your SMTP server
+            $mail->Host = 'titan.rar-it.net';
             $mail->SMTPAuth = true;
-            $mail->Username = 'support@freedom-fear.com'; // Replace with your SMTP username
-            $mail->Password = 'xSUe,R9H9q.*5Mk_'; // Replace with your SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Use SMTPS for SSL
-            $mail->Port = 465; // Use 465 for SSL, 587 for TLS
+            $mail->Username = 'support@freedom-fear.com';
+            $mail->Password = 'xSUe,R9H9q.*5Mk_';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
 
             // Recipients
             $mail->setFrom('support@freedom-fear.com', 'Freedom Fear Support');
@@ -96,26 +96,34 @@ class DB
 
             // Send the email
             $mail->send();
-            $emailSent = true; // Email was sent successfully
+            $emailSent = true;
         } catch (Exception $e) {
-            error_log("Mailer Error: {$mail->ErrorInfo}"); // Log the error
-            $emailSent = false; // Email failed to send
+            error_log("Mailer Error: {$mail->ErrorInfo}");
+            $emailSent = false;
         }
 
-        // Save user to the database regardless of email status
+        // Attempt to save user to the database
         $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt === false) {
+            error_log("MySQL Error: " . mysqli_error($conn));
+            return false;
+        }
+
         $hashed_password = md5($password);
         mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, $hashed_password, $activation);
         $result = mysqli_stmt_execute($stmt);
+        if ($result === false) {
+            error_log("MySQL Execution Error: " . mysqli_stmt_error($stmt));
+        }
         mysqli_stmt_close($stmt);
 
-        // Return a combined result of registration and email status
         return [
             'registration_success' => $result,
             'email_sent' => $emailSent
         ];
     }
+
 
     public function rest_password($email)
     {
