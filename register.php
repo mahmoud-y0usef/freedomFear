@@ -18,10 +18,8 @@
                         <div class="uk-margin"><input class="uk-input" type="text" name="username" required placeholder="Username"></div>
                         <div class="uk-margin"><input class="uk-input" type="password" name="password" required placeholder="Password"></div>
                         
-                        <!-- reCAPTCHA widget -->
-                        <div class="uk-margin">
-                            <div class="g-recaptcha" data-sitekey="6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv"></div>
-                        </div>
+                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
 
                         <div class="uk-margin"><button class="uk-button uk-button-danger uk-width-1-1"
                                 type="submit">Register</button></div>
@@ -34,8 +32,15 @@
 
     </div>
 
-<!-- Include the reCAPTCHA script -->
-<script src="https://www.google.com/recaptcha/enterprise.js?render=6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv"></script>
-<?php 
+
+<!-- Include reCAPTCHA v3 script -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv', {action: 'register'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script><?php 
     include 'inc/footer.php';
 ?>
