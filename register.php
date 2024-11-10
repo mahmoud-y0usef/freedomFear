@@ -20,7 +20,7 @@
                         
                         <!-- reCAPTCHA widget -->
                         <div class="uk-margin">
-                            <div class="g-recaptcha" data-sitekey="6Ler33oqAAAAAB0Q0evHIrs0XnrOvGOoqA29kRGj"></div>
+                            <div class="g-recaptcha" data-sitekey="6LcI43oqAAAAAIZU5SCf6BBPKq-P1c7E8gSZ_Vlv"></div>
                         </div>
 
                         <div class="uk-margin"><button class="uk-button uk-button-danger uk-width-1-1"
