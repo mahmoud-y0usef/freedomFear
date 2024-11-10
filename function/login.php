@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
         $admin = $db->login($username_or_email, $password, 'admins');
 
         if ($user) {
-            if ($user['active'] == 1 && $user['verify'] == 'done') {
+            if ($user['active'] == 1) {
                 $_SESSION['user'] = $user;
                 $db->status($user['id'] ,'bl_game_users' , 1);
                 header('Location: ../user/');
