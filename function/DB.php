@@ -108,7 +108,7 @@ class DB
         }
 
         $hashed_password = md5($password);
-        mysqli_stmt_bind_param($stmt, 'sssss', $email, $username, $hashed_password, $activation , 'done');
+        mysqli_stmt_bind_param($stmt, 'sssss', $email, $username, $hashed_password, $activation, 'done');
         $result = mysqli_stmt_execute($stmt);
         if ($result === false) {
             error_log("MySQL Execution Error: " . mysqli_stmt_error($stmt));
@@ -137,15 +137,15 @@ class DB
             $activation = md5(uniqid(rand(), true));
             $subject = 'Reset Password [Freedom Fear]';
             $body = "
-                <html>
-                <body>
-                    To reset your password, please click on this link:<br>
-                    <a href='https://freedom-fear.com/reset_password?email=$email&key=$activation' target='_blank'>Reset Password</a><br>
-                    Your email: $email<br>
-                    Your reset key: $activation
-                </body>
-                </html>
-            ";
+            <html>
+            <body>
+                To reset your password, please click on this link:<br>
+                <a href='https://freedom-fear.com/reset_password?email=$email&key=$activation' target='_blank'>Reset Password</a><br>
+                Your email: $email<br>
+                Your reset key: $activation
+            </body>
+            </html>
+        ";
 
             // Initialize PHPMailer and configure SMTP settings
             $mail = new PHPMailer(true);
@@ -153,12 +153,12 @@ class DB
             try {
                 // Server settings
                 $mail->isSMTP();
-                $mail->Host = 'titan.rar-it.net'; // Replace with your SMTP server
+                $mail->Host = 'titan.rar-it.net';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'support@freedom-fear.com'; // Replace with your SMTP username
-                $mail->Password = 'xSUe,R9H9q.*5Mk_'; // Replace with your SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-                $mail->Port = 465; // SMTP port (use 465 for SSL, 587 for TLS)
+                $mail->Username = 'support@freedom-fear.com';
+                $mail->Password = 'xSUe,R9H9q.*5Mk_';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port = 465;
 
                 // Recipients
                 $mail->setFrom('support@freedom-fear.com', 'Freedom Fear Support');
@@ -181,13 +181,15 @@ class DB
 
                 return $result;
             } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                error_log("Mailer Error: {$mail->ErrorInfo}");
+                echo "<script> window.location.href = '../forget-password.php?error=Email sending failed' </script>";
                 return false;
             }
         } else {
             return false;
         }
     }
+
 
 
     public function activate($email, $activation)
