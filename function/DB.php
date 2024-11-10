@@ -8,6 +8,8 @@ require_once('../Php/phpmailer/SMTP.php');
 require_once('../Php/phpmailer/POP3.php');
 require_once('../Php/phpmailer/Exception.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class DB
 {
 
