@@ -3,10 +3,10 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 require_once 'connection.php';
-require_once('Php/phpmailer/PHPMailer.php');
-require_once('Php/phpmailer/SMTP.php');
-require_once('Php/phpmailer/POP3.php');
-require_once('Php/phpmailer/Exception.php');
+require_once('https://freedom-fear.com/Php/phpmailer/PHPMailer.php');
+require_once('https://freedom-fear.com/Php/phpmailer/SMTP.php');
+require_once('https://freedom-fear.com/Php/phpmailer/POP3.php');
+require_once('https://freedom-fear.com/Php/phpmailer/Exception.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
