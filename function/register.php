@@ -1,5 +1,8 @@
 <?php
-
+require_once('../Php/phpmailer/PHPMailer.php');
+require_once('../Php/phpmailer/SMTP.php');
+require_once('../Php/phpmailer/POP3.php');
+require_once('../Php/phpmailer/Exception.php');
 require_once 'DB.php';
 $db = new DB();
 
