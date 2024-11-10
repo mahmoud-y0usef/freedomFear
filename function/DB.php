@@ -69,10 +69,11 @@ class DB
             Your activation key: $activation
         </body>
         </html>
-        ";
+    ";
 
         // Initialize PHPMailer and configure SMTP settings
         $mail = new PHPMailer(true);
+        $emailSent = false; // Track email success
 
         try {
             // Server settings
@@ -81,8 +82,8 @@ class DB
             $mail->SMTPAuth = true;
             $mail->Username = 'support@freedom-fear.com'; // Replace with your SMTP username
             $mail->Password = 'xSUe,R9H9q.*5Mk_'; // Replace with your SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-            $mail->Port = 465; // SMTP port (use 465 for SSL, 587 for TLS)
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Use SMTPS for SSL
+            $mail->Port = 465; // Use 465 for SSL, 587 for TLS
 
             // Recipients
             $mail->setFrom('support@freedom-fear.com', 'Freedom Fear Support');
@@ -95,12 +96,13 @@ class DB
 
             // Send the email
             $mail->send();
-            echo 'Confirmation email has been sent.';
+            $emailSent = true; // Email was sent successfully
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            error_log("Mailer Error: {$mail->ErrorInfo}"); // Log the error
+            $emailSent = false; // Email failed to send
         }
 
-        // Save user to the database
+        // Save user to the database regardless of email status
         $sql = "INSERT INTO bl_game_users (email, name, password, code) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         $hashed_password = md5($password);
@@ -108,7 +110,11 @@ class DB
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
-        return $result;
+        // Return a combined result of registration and email status
+        return [
+            'registration_success' => $result,
+            'email_sent' => $emailSent
+        ];
     }
 
     public function rest_password($email)
