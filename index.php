@@ -1,6 +1,16 @@
 <?php
 $title = 'Login';
 include 'inc/header.php';
+session_start();
+
+if (isset($_SESSION['user'])) {
+    header('Location: user/');
+}
+
+if (isset($_SESSION['admin'])) {
+    header('Location: admin/');
+}
+
 ?>
 
 <div class="welcome-page">

@@ -1,18 +1,4 @@
 
-<?php
-session_start();
-if (isset($_SESSION['user'])) {
-    header('Location: user/');
-    exit;
-}
-
-if (isset($_SESSION['admin'])) {
-    header('Location: admin/');
-    exit;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
