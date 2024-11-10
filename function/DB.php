@@ -203,7 +203,7 @@ class DB
         $user = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
         if ($user) {
-            $sql = "UPDATE bl_game_users SET active = 1 WHERE email = ? AND code = ? AND verify = 'done'";
+            $sql = "UPDATE bl_game_users SET active = 1 WHERE email = ? AND code = ?";
             $stmt = mysqli_prepare($conn, $sql);
             mysqli_stmt_bind_param($stmt, 'ss', $email, $activation);
             $result = mysqli_stmt_execute($stmt);
@@ -217,7 +217,7 @@ class DB
     public function update_active($email)
     {
         global $conn;
-        $sql = "UPDATE bl_game_users SET code = null WHERE email = ?";
+        $sql = "UPDATE bl_game_users SET code = null  , verify = 'done' WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $email);
         $result = mysqli_stmt_execute($stmt);
