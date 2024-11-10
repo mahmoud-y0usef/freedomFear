@@ -8,7 +8,7 @@ $db = new DB();
 
 if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['g-recaptcha-response'])) {
     // Verify reCAPTCHA response
-    $recaptchaSecret = '6Ler33oqAAAAAKrTDbHnp0NpJW-sjfU3vnf9Xvxt';
+    $recaptchaSecret = '6Ler33oqAAAAAB0Q0evHIrs0XnrOvGOoqA29kRGj';
     $recaptchaResponse = $_POST['g-recaptcha-response'];
     
     $recaptchaURL = 'https://www.google.com/recaptcha/api/siteverify';
