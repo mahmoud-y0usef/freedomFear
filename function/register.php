@@ -6,7 +6,20 @@ require_once('../Php/phpmailer/Exception.php');
 require_once 'DB.php';
 $db = new DB();
 
-if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['g-recaptcha-response'])) {
+    // Verify reCAPTCHA response
+    $recaptchaSecret = '6Ler33oqAAAAAKrTDbHnp0NpJW-sjfU3vnf9Xvxt';
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+    
+    $recaptchaURL = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptchaResponseData = file_get_contents($recaptchaURL . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse);
+    $recaptchaResult = json_decode($recaptchaResponseData, true);
+
+    if (!$recaptchaResult['success']) {
+        echo "<script> window.location.href = '../register.php?error=CAPTCHA verification failed' </script>";
+        exit;
+    }
+
     try {
         $email = trim($_POST['email']);
         $username = trim($_POST['username']);
@@ -66,13 +79,12 @@ if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwor
         exit;
 
     } catch (Exception $e) {
-        error_log("Registration error: " . $e->getMessage()); // Log the error
+        error_log("Registration error: " . $e->getMessage());
         echo "<script> window.location.href = '../register.php?error=Request failed' </script>";
         exit;
     }
 } else {
-    echo "<script> window.location.href = '../register.php?error=Request failed' </script>";
+    echo "<script> window.location.href = '../register.php?error=CAPTCHA verification failed' </script>";
     exit;
 }
-
 ?>
