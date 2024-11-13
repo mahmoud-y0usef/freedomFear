@@ -1,3 +1,9 @@
+<?php
+
+    $user = $db->get_user_by_id($_SESSION['user']['id']);
+
+?>
+
 <div class="page-wrapper">
         <header class="page-header">
             <div class="page-header__inner">
@@ -34,22 +40,22 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="../assets/img/flags/united-kingdom.png" alt="profile" class="profile">
+                                    <img src="../assets/img/flags/united-kingdom.png" alt="English" class="profile">
                                     English
                                     <span uk-icon="icon: triangle-down"></span>
 
                                 </a>
                                 <div uk-dropdown="mode: hover">
                                     <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="#"> <img src="../assets/img/flags/arabic.png" alt="profile"
+                                        <li><a href="#"> <img src="../assets/img/flags/arabic.png" alt="Arabic"
                                                     class="profile">Arabic</a></li>
-                                        <li><a href="#"> <img src="../assets/img/flags/germany.png" alt="profile"
+                                        <li><a href="#"> <img src="../assets/img/flags/germany.png" alt="Germany"
                                                     class="profile">Germany</a></li>
-                                        <li><a href="#"> <img src="../assets/img/flags/china.png" alt="profile"
+                                        <li><a href="#"> <img src="../assets/img/flags/china.png" alt="China"
                                                     class="profile">China</a></li>
-                                        <li><a href="#"> <img src="../assets/img/flags/India.png" alt="profile"
+                                        <li><a href="#"> <img src="../assets/img/flags/India.png" alt="India"
                                                     class="profile">India</a></li>
-                                        <li><a href="#"> <img src="../assets/img/flags/french.png" alt="profile"
+                                        <li><a href="#"> <img src="../assets/img/flags/french.png" alt="French"
                                                     class="profile">French</a></li>
 
                                     </ul>
@@ -68,13 +74,13 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="../assets/img/profile.png" alt="profile" class="profile">
-                                    Hi, <?php echo $_SESSION['user']['name']?>
+                                    <img src="../assets/img/<?= $user['img'] ?>" alt="profile" class="profile">
+                                    Hi, <?php echo $user['name']?>
                                     <span uk-icon="icon: triangle-down"></span></a>
                                 <div uk-dropdown="mode: click">
                                     <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="#">My account</a></li>
-                                        <li><a href="#">My Password</a></li>
+                                        <li><a href="up.php">My account</a></li>
+                                        <li><a href="ps.php">Change Password</a></li>
                                         <li class="uk-nav-divider"></li>
                                         <li><a href="function/logout.php">Log Out</a></li>
                                     </ul>

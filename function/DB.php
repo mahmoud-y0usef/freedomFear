@@ -39,6 +39,19 @@ class DB
         return $user;
     }
 
+    public function get_user_by_id($id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM bl_game_users WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $user;
+    }
+
     public function get_user_by_username($username)
     {
         global $conn;
@@ -51,6 +64,46 @@ class DB
         mysqli_stmt_close($stmt);
         return $user;
     }
+
+    public function update_password_by_id($id, $password)
+    {
+        global $conn;
+        $sql = "UPDATE bl_game_users SET password = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $hashed_password = md5($password);
+        mysqli_stmt_bind_param($stmt, 'si', $hashed_password, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+    
+
+    public function update_user($id, $name, $nick, $email, $image)
+    {
+        global $conn;
+        $sql = "UPDATE bl_game_users SET name = ?, nick = ?, email = ?, img = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ssssi', $name, $nick, $email, $image, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
+    public function check_user_exists($field, $value, $currentUserId)
+    {
+        // Prepare and execute SQL statement to check if another user has the same name or email
+        global $conn;
+        $sql = "SELECT COUNT(*) FROM bl_game_users WHERE $field = ? AND id != ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $value, $currentUserId);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        return $count > 0;
+    }
+
 
     public function register($email, $username, $password)
     {
@@ -262,6 +315,7 @@ class DB
         mysqli_stmt_close($stmt);
         return $result;
     }
+
 
     public function delete_key($email)
     {

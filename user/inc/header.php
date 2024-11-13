@@ -34,7 +34,14 @@ $db = new DB();
     <script src="../assets/js/libs.js"></script>
     <script src="../assets/js/main.js"></script>
 
+    <style>
+        #prof:hover {
+            cursor: pointer;
+            opacity: 0.5;
+        }
 
+
+    </style>
 </head>
 
 
