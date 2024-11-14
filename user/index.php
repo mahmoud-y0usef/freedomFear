@@ -7,11 +7,8 @@ include 'inc/navbar.php';
 $events = $db->get_events();
 $communitys = $db->get_community();
 $slides = $db->get_service();
-
+$last_blogs = $db->get_last_4_blogs();
 ?>
-
-
-
 
 <div class="page-content">
     <?php
@@ -60,57 +57,26 @@ $slides = $db->get_service();
                 <div class="js-trending">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="game-card --horizontal">
-                                    <div class="game-card__box">
-                                        <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                    src="../assets/img/trending2.jpg" alt="Alien Games" /></a>
-                                        </div>
-                                        <div class="game-card__info"><a class="game-card__title"
-                                                href="10_game-profile.html"> Cyber Games</a>
-                                            <div class="game-card__genre">Warring factions have brought the
-                                                Origin System to the brink of destruction.</div>
+                            <?php foreach ($last_blogs as $blog): ?>
+                                <div class="swiper-slide">
+                                    <div class="game-card --horizontal">
+                                        <div class="game-card__box">
+                                            <div class="game-card__media"><a href="news.php?blog=<?= $blog['id']?>"><img
+                                                        src="../assets/img/blogs/<?= $blog['image'] ?>" alt="<?= $blog['address'] ?>" /></a>
+                                            </div>
+                                            <div class="game-card__info"><a class="game-card__title"
+                                                    href="news.php?blog=<?= $blog['id']?>"><?= $blog['address'] ?></a>
+                                                <div class="game-card__genre"><?= $blog['short_description'] ?></div>
 
-                                            <div class="game-card__bottom">
-                                                <a class="uk-button-read-more" href="16_post.html">View More</a>
+                                                <div class="game-card__bottom">
+                                                    <a class="uk-button-read-more" href="news.php?blog=<?= $blog['id']?>">View More</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="game-card --horizontal">
-                                    <div class="game-card__box">
-                                        <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                    src="../assets/img/trending3.jpg" alt="Warframe" /></a></div>
-                                        <div class="game-card__info"><a class="game-card__title"
-                                                href="10_game-profile.html">Game of Thrones</a>
-                                            <div class="game-card__genre">Warring factions have brought the
-                                                Origin System to the brink of destruction.</div>
-                                            <div class="game-card__bottom">
-                                                <a class="uk-button-read-more" href="16_post.html">View More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="game-card --horizontal">
-                                    <div class="game-card__box">
-                                        <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                    src="../assets/img/trending.jpg" alt="Warframe" /></a></div>
-                                        <div class="game-card__info"><a class="game-card__title"
-                                                href="10_game-profile.html"> Historical Games</a>
-                                            <div class="game-card__genre">Warring factions have brought the
-                                                Origin System to the brink of destruction.</div>
-                                            <div class="game-card__bottom">
-                                                <a class="uk-button-read-more" href="16_post.html">View More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php endforeach; ?>
+                         
                         </div>
                         <div class="swipper-nav">
                             <div class="swiper-button-prev"></div>
@@ -179,65 +145,6 @@ $slides = $db->get_service();
                 </div>
             </div>
 
-            <div class="uk-width-1-1">
-                <h3 class="uk-text-lead">Our Store</h3>
-                <div class="js-store">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-
-
-
-                            <div class="swiper-slide">
-                                <div class="game-card">
-                                    <div class="game-card__box">
-                                        <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                    src="../assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
-                                        </div>
-                                        <div class="game-card__info"><a class="game-card__title"
-                                                href="10_game-profile.html">t-shirt</a>
-                                            <div class="game-card__genre">Clothes</div>
-                                            <div class="game-card__rating-and-price">
-
-                                                <div class="game-card__price"><span>$4.99 </span></div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="swiper-slide">
-                                <div class="game-card">
-                                    <div class="game-card__box">
-                                        <div class="game-card__media"><a href="10_game-profile.html"><img
-                                                    src="../assets/img/game-1.jpg" alt="Struggle of Rivalry" /></a>
-                                        </div>
-                                        <div class="game-card__info"><a class="game-card__title"
-                                                href="10_game-profile.html">Pistol</a>
-                                            <div class="game-card__genre">Weapones</div>
-                                            <div class="game-card__rating-and-price">
-
-                                                <div class="game-card__price"><span>$4.99 </span></div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-
-
-
-
-            </div>
             <main class="sl_main">
                 <div id="slider">
 

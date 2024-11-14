@@ -465,5 +465,97 @@ class DB
     }
 
 
+    public function get_all_blogs()
+    {
+        global $conn;
+        $sql = "SELECT * FROM blogs";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $blogs;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_all_category_blog()
+    {
+        global $conn;
+        $sql = "SELECT * FROM catigory_blog";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $category = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $category;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function get_blog_by_id($id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM blogs WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $blog = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $blog;
+    }
+
+    public function get_blog_by_category($category)
+    {
+        global $conn;
+        $sql = "SELECT * FROM blogs WHERE catigory_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $category);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $blog = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_stmt_close($stmt);
+        return $blog;
+    }
+
+
+    public function get_last_4_blogs()
+    {
+        global $conn;
+        $sql = "SELECT * FROM blogs ORDER BY id DESC LIMIT 4";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $blogs;
+        } else {
+            return false;
+        }
+    }
+
+    public function search_blog($search)
+    {
+        global $conn;
+        $sql = "SELECT * FROM blogs WHERE address LIKE ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $search = '%' . $search . '%';
+        mysqli_stmt_bind_param($stmt, 's', $search);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_stmt_close($stmt);
+        return $blogs;
+    }
+
+
+
 }
 ?>

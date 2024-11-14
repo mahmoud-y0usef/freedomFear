@@ -1,5 +1,6 @@
 <?php 
     $subjects = $db->select_subjects();
+    $all_blog_for_help = $db->get_blog_by_category(1);
 ?>
 
 <div class="uk-flex-top" id="modal-report" data-uk-modal>
@@ -50,19 +51,39 @@
         <div class="search">
             <div class="search__input">
                 <i class="ico_search"></i>
-                <input type="search" name="search" placeholder="Search">
+                <input type="search" name="search" placeholder="Search" >
+                
             </div>
         </div>
         <div class="uk-margin-small-left uk-margin-small-bottom uk-margin-medium-top">
             <h4>Popular Q&A</h4>
-            <ul>
-                <li><img src="../assets/img/svgico/clipboard-text.svg" alt="icon"><span>How to Upload Your Developed Game</span></li>
-                <li><img src="../assets/img/svgico/clipboard-text.svg" alt="icon"><span>How to Go Live Stream</span></li>
-                <li><img src="../assets/img/svgico/clipboard-text.svg" alt="icon"><span>Get in touch with the Creator Support Team</span></li>
+            <ul id="in_load">
+                <?php foreach($all_blog_for_help as $blog): ?>
+                <li><a href="blog.php?id=<?php echo $blog['id']; ?>"><?php echo $blog['address']; ?></a></li>
+                <?php endforeach; ?>
             </ul>
             <ul>
-                <li><a href="10_game-profile.html">browse all articles</a></li>
+                <li><a href="news.php">browse all articles</a></li>
             </ul>
         </div>
     </div>
 </div>
+
+
+<script>
+    // make search in help modal work 
+    $(document).ready(function(){
+        $('input[name="search"]').on('keyup', function(){
+            var search = $(this).val();
+            $.ajax({
+                url: '../function/search_help.php',
+                method: 'post',
+                data: {search: search},
+                success: function(data){
+                    $('#in_load').html(data);
+                }
+            });
+        });
+    });
+
+</script>
