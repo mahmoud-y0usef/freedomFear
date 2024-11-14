@@ -468,7 +468,7 @@ class DB
     public function get_all_blogs()
     {
         global $conn;
-        $sql = "SELECT * FROM blogs";
+        $sql = "SELECT * FROM blogs WHERE status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
             mysqli_stmt_execute($stmt);
@@ -501,7 +501,7 @@ class DB
     public function get_blog_by_id($id)
     {
         global $conn;
-        $sql = "SELECT * FROM blogs WHERE id = ?";
+        $sql = "SELECT * FROM blogs WHERE id = ? and status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'i', $id);
         mysqli_stmt_execute($stmt);
@@ -514,7 +514,7 @@ class DB
     public function get_blog_by_category($category)
     {
         global $conn;
-        $sql = "SELECT * FROM blogs WHERE catigory_id = ?";
+        $sql = "SELECT * FROM blogs WHERE catigory_id = ? and status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 's', $category);
         mysqli_stmt_execute($stmt);
@@ -528,7 +528,7 @@ class DB
     public function get_last_4_blogs()
     {
         global $conn;
-        $sql = "SELECT * FROM blogs ORDER BY id DESC LIMIT 4";
+        $sql = "SELECT * FROM blogs where status = 1  ORDER BY id  DESC LIMIT 4 ";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
             mysqli_stmt_execute($stmt);
@@ -544,7 +544,7 @@ class DB
     public function search_blog($search)
     {
         global $conn;
-        $sql = "SELECT * FROM blogs WHERE address LIKE ?";
+        $sql = "SELECT * FROM blogs WHERE address LIKE ? OR description LIKE ? and status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         $search = '%' . $search . '%';
         mysqli_stmt_bind_param($stmt, 's', $search);

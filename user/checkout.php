@@ -1,11 +1,11 @@
 <?php
 $title = "Checkout";
-$selected = "Checkout";
+$selected = "wallet";
 include 'inc/header.php';
 include 'inc/navbar.php';
 
 $charge_id = $_GET['charge_id'];
-$charge = $db->select_charge_by_id($charge_id); // Implement this method in DB.php
+$charge = $db->select_charge_by_id($charge_id);
 
 ?>
 

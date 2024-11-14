@@ -1,6 +1,6 @@
 <?php
 $title = "Wallet";
-$selected = "Wallet";
+$selected = "wallet";
 include 'inc/header.php';
 include 'inc/navbar.php';
 $charges = $db->select_charges();
