@@ -464,13 +464,12 @@ class DB
         return $charge;
     }
 
-    public function update_user_coins ($id , $coins , $jwel)
+    public function update_user_coins ($id , $newWalletValue)
     {
         global $conn;
         $sql = "UPDATE bl_game_users SET coins = ? WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        $coins = $coins . '&' . $jwel;
-        mysqli_stmt_bind_param($stmt, 'si', $coins, $id);
+        mysqli_stmt_bind_param($stmt, 'si', $newWalletValue, $id);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $result;
