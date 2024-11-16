@@ -4,8 +4,14 @@ $selected = "wallet";
 include 'inc/header.php';
 include 'inc/navbar.php';
 
-$charge_id = $_GET['charge_id'];
+$charge_id = isset($_GET['charge_id']) ? $_GET['charge_id'] : null;
+if (!$charge_id) {
+    die('Invalid charge ID');
+}
 $charge = $db->select_charge_by_id($charge_id);
+if (!$charge) {
+    die('Charge not found');
+}
 
 ?>
 
@@ -32,30 +38,57 @@ $charge = $db->select_charge_by_id($charge_id);
     <?php include 'inc/modals.php'; ?>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AfZ4mwHnbQ67D47e_EnNmpPvJ0Zconitm1MrDf55lx6fa3RNDSpDkcQPbD7M3Kbr9WIvpW1YnN73iMeD&currency=USD&intent=capture"></script>
 <script>
     paypal.Buttons({
-        createOrder: function(data, actions) {
-            // Set up the transaction
+        createOrder: function (data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '<?php echo $charge['price']; ?>'
+                        value: '<?php echo $charge['price']; ?>' // Ensure price is correctly passed
                     }
                 }]
             });
         },
-        onApprove: function(data, actions) {
-            // Capture the funds from the transaction
-            return actions.order.capture().then(function(details) {
-                // Show a success message to your buyer
-                alert('Transaction completed by ' + details.payer.name.given_name);
-                // Redirect to a success page
-                window.location.href = "success.php?orderID=" + data.orderID + "&userID=<?php echo $_SESSION['user']['id']; ?>" + "&chargeID=<?php echo $charge['id']; ?>";
-            });
+        onApprove: function (data, actions) {
+            // Capture the order
+            return actions.order.capture()
+                .then(function (details) {
+                    console.log('Transaction completed:', details); // Log the transaction details
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    <?php
+
+                    $coinsAndJwel = explode('&', $_SESSION['user']['coins']);
+                    $coins = isset($coinsAndJwel[0]) ? $coinsAndJwel[0] : 0;
+                    $jwel = isset($coinsAndJwel[1]) ? $coinsAndJwel[1] : 0;
+                    $coins += $charge['amount_coins'];
+                    $jwel += $charge['amount_jwel'];
+                    $db->update_user_coins($_SESSION['user']['id'], $coins, $jwel);
+
+                    ?>
+                    // Redirect to the success page
+                    window.location.href = "success.php?orderID=" + data.orderID +
+                        "&userID=<?php echo $_SESSION['user']['id']; ?>" +
+                        "&chargeID=<?php echo $charge['id']; ?>";
+                })
+                .catch(function (error) {
+                    console.error('Capture error:', error); // Log the error
+                    alert('An error occurred while capturing the payment.');
+                    // Redirect to error page
+                    window.location.href = "error.php?error=" + encodeURIComponent(error.message);
+                });
+        },
+        onError: function (err) {
+            console.error('PayPal error:', err); // Log any unexpected errors
+            alert('An unexpected error occurred. Please try again.');
+            window.location.href = "error.php?error=" + encodeURIComponent(err.message);
         }
-    }).render('#paypal-button-container'); // Display payment options on your web page
+    }).render('#paypal-button-container');
 </script>
 
+
+
 </body>
+
 </html>

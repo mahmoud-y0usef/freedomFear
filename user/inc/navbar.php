@@ -65,9 +65,9 @@
 
 
 
-                        <a class="action-btn" href="06_chats.html"><i class="ico_message"></i><span
+                        <a class="action-btn" href="#"><i class="ico_message"></i><span
                                 class="animation-ripple-delay1"></span></a>
-                        <a class="action-btn" href="07_friends.html"><i class="ico_notification"></i><span
+                        <a class="action-btn" href="#"><i class="ico_notification"></i><span
                                 class="animation-ripple-delay2"></span></a>
 
                         <ul class="uk-subnav uk-subnav-pill" uk-margin>

@@ -464,6 +464,18 @@ class DB
         return $charge;
     }
 
+    public function update_user_coins ($id , $coins , $jwel)
+    {
+        global $conn;
+        $sql = "UPDATE bl_game_users SET coins = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $coins = $coins . '&' . $jwel;
+        mysqli_stmt_bind_param($stmt, 'si', $coins, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
 
     public function get_all_blogs()
     {
@@ -547,7 +559,7 @@ class DB
         $sql = "SELECT * FROM blogs WHERE address LIKE ? OR description LIKE ? and status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         $search = '%' . $search . '%';
-        mysqli_stmt_bind_param($stmt, 's', $search);
+        mysqli_stmt_bind_param($stmt, 'ss', $search , $search);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);

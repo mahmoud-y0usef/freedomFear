@@ -4,6 +4,7 @@ $selected = "wallet";
 include 'inc/header.php';
 include 'inc/navbar.php';
 $charges = $db->select_charges();
+$users = $db->get_user_by_id($_SESSION['user']['id']);
 ?>
 
 <div class="page-content">
@@ -11,6 +12,43 @@ $charges = $db->select_charges();
 
     <main class="page-main">
         <div class="uk-grid" data-uk-grid>
+            <!-- select wallet of users -->
+            <div class="uk-width-1-1@s uk-width-1-1@m uk-width-1-1@l">
+                <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
+                    <h3 class="uk-card-title">Your Wallet</h3>
+                    <div class="uk-grid" data-uk-grid>
+                        <!-- Jwel Section -->
+                        <div class="uk-width-1-2@s uk-width-1-2@m uk-width-1-2@l">
+                            <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
+                                <h3 class="uk-card-title">Your Jwel</h3>
+                                <?php
+                                $coinsAndJwel = explode('&', $users['coins']);
+                                $jwel = isset($coinsAndJwel[1]) ? $coinsAndJwel[1] : '0';
+                                ?>
+                                <h2 class="uk-text-bold"><?php echo trim($jwel); ?> <img
+                                        src="../assets/coins/packages/<?php echo $charges[7]['img']; ?>" alt=""
+                                        class="mouse">
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Coins Section -->
+                        <div class="uk-width-1-2@s uk-width-1-2@m uk-width-1-2@l">
+                            <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
+                                <h3 class="uk-card-title">Your Coins</h3>
+                                <?php
+                                $coins = isset($coinsAndJwel[0]) ? $coinsAndJwel[0] : '0';
+                                ?>
+                                <h2 class="uk-text-bold"><?php echo trim($coins); ?> <img
+                                        src="../assets/coins/packages/<?php echo $charges[8]['img']; ?>" alt=""
+                                        class="mouse"></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="uk-width-2-3@l uk-width-3-3@m uk-width-3-3@s"
                 style="display: flex; justify-content: space-evenly; flex-flow: row wrap;width: 100% !important;">
                 <?php foreach ($charges as $charge): ?>
