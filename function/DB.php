@@ -567,6 +567,48 @@ class DB
     }
 
 
+    public function get_type_lang_stream()
+    {
+        global $conn;
+        $sql = "SELECT * FROM type_lang_stream";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $type_lang_stream = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $type_lang_stream;
+        } else {
+            return false;
+        }
+    }
 
+    public function get_streams()
+    {
+        global $conn;
+        $sql = "SELECT * FROM streams WHERE status = 1";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $streams = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+            return $streams;
+        } else {
+            return false;
+        }
+    }
+
+    public function addStream($title, $url, $lang, $img, $name)
+    {
+        global $conn;
+        $sql = "INSERT INTO streams (address, embed, lang, img, name) VALUES (?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ssiss', $title, $url, $lang, $img, $name);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
 }
 ?>

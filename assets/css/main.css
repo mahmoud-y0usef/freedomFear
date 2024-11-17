@@ -767,6 +767,11 @@ html #youzify-groups-list .item .item-title a {
     box-shadow: 10px 10px #15181f;
 }
 
+.dark-theme .entry-main {
+    
+    color: #000000;
+}
+
 body.no-scroll {
     overflow: hidden;
 }
@@ -4874,6 +4879,15 @@ body.dark-theme .uk-subnav-pill>.uk-active>a {
 
 body.dark-theme .uk-subnav-pill>*> :first-child {
     color: white;
+}
+
+body.dark-theme li[data-uk-filter-control] a {
+    color: black !important;
+}
+
+body.dark-theme li[data-uk-filter-control] a:hover {
+    color: #F46119 !important;
+    background-color: inherit !important;
 }
 
 body.dark-theme .uk-modal-dialog {
