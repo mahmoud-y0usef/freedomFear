@@ -8458,7 +8458,7 @@ nav {
 .card {
     position: relative;
     width: 320px;
-    height: 480px;
+    height: auto;
     background: #191919;
     border-radius: 20px;
     overflow: hidden;
