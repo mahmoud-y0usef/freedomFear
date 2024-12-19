@@ -12,37 +12,33 @@ $db = new DB();
 
 <head>
     <meta charset="utf-8">
-    <title>Freedom Fear | <?php echo $title ?></title>
-    <meta content="Free dom fear" name="author">
-    <meta content="Freedom Fear" name="description">
+    <title>Freedom Fear - Fearless Gaming Adventure | <?php echo $title ?></title>
+    <meta name="author" content="Freedom Fear Team">
+    <meta name="description" content="Step into the world of Freedom Fear, a thrilling gaming adventure where strategy meets bravery. Join fearless players to conquer challenges and redefine gaming excitement!">
+    <meta name="keywords" content="Freedom Fear, gaming adventure, strategy games, fearless players, freedom games, exciting challenges, multiplayer games, action games">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="HandheldFriendly" content="true">
     <meta name="format-detection" content="telephone=no">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/libs.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/fonts/simple-line-icons/css/simple-line-icons.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;display=swap" rel="stylesheet">
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-
     <script src="../assets/js/libs.js"></script>
     <script src="../assets/js/main.js"></script>
-
     <style>
         #prof:hover {
             cursor: pointer;
             opacity: 0.5;
         }
-
-
     </style>
 </head>
+
 
 
 <body class="page-community">

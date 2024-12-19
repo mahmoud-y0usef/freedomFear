@@ -1,20 +1,21 @@
-<?php 
-    $subjects = $db->select_subjects();
-    $all_blog_for_help = $db->get_blog_by_category(1);
+<?php
+$subjects = $db->select_subjects();
+$all_blog_for_help = $db->get_blog_by_category(1);
 ?>
 
 <div class="uk-flex-top" id="modal-report" data-uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <button class="uk-modal-close-default" type="button" data-uk-close></button>
         <h2 class="uk-modal-title">Send Report</h2>
-        <form class="uk-form-stacked" action="../function/reports.php" method="post" enctype="multipart/form-data" id="reportForm">
+        <form class="uk-form-stacked" action="../function/reports.php" method="post" enctype="multipart/form-data"
+            id="reportForm">
             <div class="uk-margin">
                 <div class="uk-form-label">Subject</div>
                 <div class="uk-form-controls">
                     <select name="sub" required class="js-select">
                         <option value="">Select Subject</option>
-                        <?php foreach($subjects as $subject): ?>
-                        <option value="<?php echo $subject['id']; ?>"><?php echo $subject['name']; ?></option>
+                        <?php foreach ($subjects as $subject): ?>
+                            <option value="<?php echo $subject['id']; ?>"><?php echo $subject['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -22,7 +23,8 @@
             <div class="uk-margin">
                 <div class="uk-form-label">Details</div>
                 <div class="uk-form-controls">
-                    <textarea name="details" required class="uk-textarea" placeholder="Try to include all details..."></textarea>
+                    <textarea name="details" required class="uk-textarea"
+                        placeholder="Try to include all details..."></textarea>
                 </div>
                 <div class="uk-form-controls uk-margin-small-top">
                     <div data-uk-form-custom>
@@ -51,15 +53,15 @@
         <div class="search">
             <div class="search__input">
                 <i class="ico_search"></i>
-                <input type="search" name="search" placeholder="Search" >
-                
+                <input type="search" name="search" placeholder="Search">
+
             </div>
         </div>
         <div class="uk-margin-small-left uk-margin-small-bottom uk-margin-medium-top">
             <h4>Popular Q&A</h4>
             <ul id="in_load">
-                <?php foreach($all_blog_for_help as $blog): ?>
-                <li><a href="blog.php?id=<?php echo $blog['id']; ?>"><?php echo $blog['address']; ?></a></li>
+                <?php foreach ($all_blog_for_help as $blog): ?>
+                    <li><a href="blog.php?id=<?php echo $blog['id']; ?>"><?php echo $blog['address']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
             <ul>
@@ -72,18 +74,98 @@
 
 <script>
     // make search in help modal work 
-    $(document).ready(function(){
-        $('input[name="search"]').on('keyup', function(){
+    $(document).ready(function () {
+        $('input[name="search"]').on('keyup', function () {
             var search = $(this).val();
             $.ajax({
                 url: '../function/search_help.php',
                 method: 'post',
-                data: {search: search},
-                success: function(data){
+                data: { search: search },
+                success: function (data) {
                     $('#in_load').html(data);
                 }
             });
         });
     });
+
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const translations = {
+            arabic: {
+                welcome: 'مرحبا',
+                select_language: 'اختر اللغة',
+            },
+            english: {
+                welcome: 'Welcome',
+                select_language: 'Select Language',
+            },
+            german: {
+                welcome: 'Willkommen',
+                select_language: 'Sprache auswählen',
+            },
+            china: {
+                welcome: '欢迎',
+                select_language: '选择语言',
+            },
+            french: {
+                welcome: 'Bienvenue',
+                select_language: 'Choisir la langue',
+            },
+            india: {
+                welcome: 'स्वागत है',
+                select_language: 'भाषा चुनें',
+            },
+        };
+
+        function translateContent(language) {
+            const elementsToTranslate = document.querySelectorAll('[data-translate-key]');
+            elementsToTranslate.forEach((element) => {
+                const key = element.getAttribute('data-translate-key');
+                if (translations[language] && translations[language][key]) {
+                    element.innerText = translations[language][key];
+                } else {
+                    console.warn(`Translation for key "${key}" not found in "${language}" language.`);
+                }
+            });
+        }
+
+        const currentLanguageElement = document.querySelector('.uk-subnav-lang a');
+        const languageDropdownItems = document.querySelectorAll('.uk-dropdown-nav a');
+
+        function updateLanguageUI(language) {
+            const selectedFlag = document.querySelector(`[data-lang="${language}"] img`);
+            const selectedText = document.querySelector(`[data-lang="${language}"]`);
+
+            if (currentLanguageElement && selectedFlag && selectedText) {
+                currentLanguageElement.querySelector('img').src = selectedFlag.src;
+                currentLanguageElement.querySelector('span').innerText = selectedText.textContent.trim();
+            } else {
+                console.warn(`Unable to find UI elements for language "${language}".`);
+            }
+        }
+
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'english';
+        translateContent(savedLanguage);
+        updateLanguageUI(savedLanguage);
+
+        languageDropdownItems.forEach((item) => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                const selectedLanguage = item.getAttribute('data-lang');
+                if (translations[selectedLanguage]) {
+                    localStorage.setItem('selectedLanguage', selectedLanguage);
+                    translateContent(selectedLanguage);
+                    updateLanguageUI(selectedLanguage);
+                } else {
+                    console.warn(`Translations for language "${selectedLanguage}" are not available.`);
+                }
+            });
+        });
+    });
+
 
 </script>
