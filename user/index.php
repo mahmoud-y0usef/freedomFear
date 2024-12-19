@@ -26,7 +26,7 @@ $last_blogs = $db->get_last_4_blogs();
 
         <div class="uk-grid" data-uk-grid>
             <div class="uk-width-2-3@l uk-width-3-3@m uk-width-3-3@s">
-                <h3 class="uk-text-lead">Recommended Events</h3>
+                <h3 class="uk-text-lead" data-translate-key="recomndedevent">Recommended Events</h3>
                 <div class="js-recommend">
                     <div class="swiper">
                         <div class="swiper-wrapper">
@@ -53,7 +53,7 @@ $last_blogs = $db->get_last_4_blogs();
                 </div>
             </div>
             <div class="uk-width-1-3@l uk-width-3-3@m uk-width-3-3@s">
-                <h3 class="uk-text-lead">News Archive</h3>
+                <h3 class="uk-text-lead" data-translate-key="newsarchive">News Archive</h3>
                 <div class="js-trending">
                     <div class="swiper">
                         <div class="swiper-wrapper">
@@ -88,7 +88,7 @@ $last_blogs = $db->get_last_4_blogs();
             </div>
 
             <div class="uk-width-1-1">
-                <h3 class="uk-text-lead">Our Communities</h3>
+                <h3 class="uk-text-lead" data-translate-key="ourcommunities">Our Communities</h3>
                 <div class="js-popular">
                     <div class="swiper">
                         <div class="swiper-wrapper">
@@ -139,7 +139,7 @@ $last_blogs = $db->get_last_4_blogs();
             <div class="uk-width-5-5">
                 <div class="js-popular2" style="display: flex; justify-content: center;">
                     <div class="rectangle_popular-ac" style="display: flex; justify-content: center;width: 300px;">
-                        <a class="uk-button  uk-button-theme-color uk-width-5-5 uk-margin-small-bottom ">Download
+                        <a class="uk-button  uk-button-theme-color uk-width-5-5 uk-margin-small-bottom " data-translate-key="downloadnow">Download
                             Now</a>
                     </div>
                 </div>

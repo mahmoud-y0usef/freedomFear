@@ -136,6 +136,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : 'كلمة المرور الحالية',
                 newpassword : 'كلمة المرور الجديدة',
                 change : 'تغيير',
+                recomndedevent : 'الأحداث الموصى بها',
+                newsarchive : 'أرشيف الأخبار',
+                ourcommunities : 'مجتمعاتنا',
+                downloadnow : 'حمل الآن',
+
 
             },
             english: {
@@ -179,7 +184,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : 'Current Password',
                 newpassword : 'New Password',
                 change : 'Change',
-
+                recomndedevent : 'Recommended Events',
+                newsarchive : 'News Archive',
+                ourcommunities : 'Our Communities',
+                downloadnow : 'Download Now',
                 
                 
             },
@@ -224,6 +232,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : 'Aktuelles Passwort',
                 newpassword : 'Neues Passwort',
                 change : 'Veränderung',
+                recomndedevent : 'Empfohlene Veranstaltungen',
+                newsarchive : 'Nachrichtenarchiv',
+                ourcommunities : 'Unsere Gemeinschaften',
+                downloadnow : 'Jetzt herunterladen',
+
 
             },
             china: {
@@ -267,6 +280,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : '当前密码',
                 newpassword : '新密码',
                 change : '更改',
+                recomndedevent : '推荐活动',
+                newsarchive : '新闻档案',
+                ourcommunities : '我们的社区',
+                downloadnow : '立即下载',
+
 
 
             },
@@ -311,6 +329,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : 'Mot de passe actuel',
                 newpassword : 'Nouveau mot de passe',
                 change : 'Changement',
+                recomndedevent : 'Événements recommandés',
+                newsarchive : 'Archives des nouvelles',
+                ourcommunities : 'Nos communautés',
+                downloadnow : 'Télécharger maintenant',
                 
 
             },
@@ -355,6 +377,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 currentpassword : 'वर्तमान पासवर्ड',
                 newpassword : 'नया पासवर्ड',
                 change : 'परिवर्तन',
+                recomndedevent : 'अनुशंसित घटनाएँ',
+                newsarchive : 'समाचार संग्रह',
+                ourcommunities : 'हमारी समुदाय',
+                downloadnow : 'अभी डाउनलोड करें',
+                
 
             },
         };
