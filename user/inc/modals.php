@@ -141,6 +141,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : 'مجتمعاتنا',
                 downloadnow : 'حمل الآن',
                 categories : 'التصنيفات',
+                yourwallet : 'محفظتك',
+                yourjwel : 'مجوهراتك',
+                yourcoins : 'عملاتك',
+                buynow : 'اشتري الآن',
 
             },
             english: {
@@ -189,6 +193,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : 'Our Communities',
                 downloadnow : 'Download Now',
                 categories : 'Categories',
+                yourwallet : 'Your Wallet',
+                yourjwel : 'Your Jwel',
+                yourcoins : 'Your Coins',
+                buynow : 'Buy Now',
+
                 
             },
             german: {
@@ -237,6 +246,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : 'Unsere Gemeinschaften',
                 downloadnow : 'Jetzt herunterladen',
                 categories : 'Kategorien',
+                yourwallet : 'Deine Brie ftasche',
+                yourjwel : 'Dein Jwel',
+                yourcoins : 'Deine Münzen',
+                buynow : 'Jetzt kaufen ',
 
             },
             china: {
@@ -285,7 +298,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : '我们的社区',
                 downloadnow : '立即下载',
                 categories : '分类',
-
+                yourwallet : '你的钱包',
+                yourjwel : '你的珠宝',
+                yourcoins : '你的硬币',
+                buynow : '现在购买',
 
             },
             french: {
@@ -334,6 +350,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : 'Nos communautés',
                 downloadnow : 'Télécharger maintenant',
                 categories : 'Catégories',
+                yourwallet : 'Votre portefeuille',
+                yourjwel : 'Votre Jwel',
+                yourcoins : 'Vos pièces',
+                buynow : 'Acheter maintenant',
+
 
             },
             india: {
@@ -382,7 +403,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 ourcommunities : 'हमारी समुदाय',
                 downloadnow : 'अभी डाउनलोड करें',
                 categories : 'श्रेणियाँ',
-
+                yourwallet : 'आपका बटुआ',
+                yourjwel : 'आपकी ज्वेल',
+                yourcoins : 'आपके सिक्के',
+                buynow : 'अब खरीदें',
             },
         };
 

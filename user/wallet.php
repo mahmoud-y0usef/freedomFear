@@ -16,12 +16,12 @@ $users = $db->get_user_by_id($_SESSION['user']['id']);
             <!-- Wallet Information -->
             <div class="uk-width-1-1@s uk-width-1-1@m uk-width-1-1@l">
                 <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-                    <h3 class="uk-card-title">Your Wallet</h3>
+                    <h3 class="uk-card-title" data-translate-key="yourwallet">Your Wallet</h3>
                     <div class="uk-grid" data-uk-grid>
                         <!-- Jwel Section -->
                         <div class="uk-width-1-2@s uk-width-1-2@m uk-width-1-2@l">
                             <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-                                <h3 class="uk-card-title">Your Jwel</h3>
+                                <h3 class="uk-card-title" data-translate-key="yourjwel">Your Jwel</h3>
                                 <?php
                                 $coinsAndJwel = explode('&', $users['coins']);
                                 $jwel = isset($coinsAndJwel[1]) ? $coinsAndJwel[1] : '0';
@@ -36,7 +36,7 @@ $users = $db->get_user_by_id($_SESSION['user']['id']);
                         <!-- Coins Section -->
                         <div class="uk-width-1-2@s uk-width-1-2@m uk-width-1-2@l">
                             <div class="uk-card uk-card-default uk-card-body uk-margin-bottom">
-                                <h3 class="uk-card-title">Your Coins</h3>
+                                <h3 class="uk-card-title" data-translate-key="yourcoins">Your Coins</h3>
                                 <?php
                                 $coins = isset($coinsAndJwel[0]) ? $coinsAndJwel[0] : '0';
                                 ?>
@@ -61,7 +61,7 @@ $users = $db->get_user_by_id($_SESSION['user']['id']);
                         <div class="contentBox">
                             <h3><?php echo htmlspecialchars($charge['name']); ?></h3>
                             <h2 class="price"><?php echo htmlspecialchars($charge['price']); ?> $</h2>
-                            <a href="checkout.php?charge_id=<?php echo htmlspecialchars($charge['id']); ?>" class="buy">Buy Now</a>
+                            <a href="checkout.php?charge_id=<?php echo htmlspecialchars($charge['id']); ?>" class="buy" data-translate-key="buynow">Buy Now</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
