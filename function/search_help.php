@@ -14,6 +14,6 @@ if (!empty($blogs)) {
             . htmlspecialchars($blog['address'], ENT_QUOTES, 'UTF-8') . '</a></li>';
     }
 } else {
-    echo '<li>No blogs found.</li>';
+    echo '<li data-translate-key="noblogsfound">No blogs found.</li>';
 }
 ?>

@@ -43,19 +43,19 @@ $user = $db->get_user_by_id($_SESSION['user']['id']);
                             </a>
                             <div uk-dropdown="mode: hover">
                                 <ul class="uk-nav uk-dropdown-nav">
-                                    <li><a href="#" data-lang="arabic"><img src="../assets/img/flags/arabic.png"
-                                                alt="Arabic" class="profile"> Arabic</a></li>
+                                    <li><a href="#" data-lang="arabic" ><img src="../assets/img/flags/arabic.png"
+                                                alt="Arabic" class="profile" > <span data-translate-key="arabic"></span></a></li>
                                     <li><a href="#" data-lang="english"><img
                                                 src="../assets/img/flags/united-kingdom.png" alt="English"
-                                                class="profile"> English</a></li>
+                                                class="profile" > <span data-translate-key="english"></span></a></li>
                                     <li><a href="#" data-lang="german"><img src="../assets/img/flags/germany.png"
-                                                alt="German" class="profile"> German</a></li>
+                                                alt="German" class="profile" > <span data-translate-key="german"></span></a></li>
                                     <li><a href="#" data-lang="china"><img src="../assets/img/flags/china.png"
-                                                alt="china" class="profile"> China</a></li>
+                                                alt="china" class="profile" > <span data-translate-key="china"></span></a></li>
                                     <li><a href="#" data-lang="french"><img src="../assets/img/flags/french.png"
-                                                alt="French" class="profile"> French</a></li>
+                                                alt="French" class="profile" > <span data-translate-key="french"></span></a></li>
                                     <li><a href="#" data-lang="india"><img src="../assets/img/flags/India.png"
-                                                alt="India.png" class="profile"> India.png</a></li>
+                                                alt="India.png" class="profile" > <span data-translate-key="india"></span></a></li>
                                 </ul>
                             </div>
                         </li>
@@ -75,10 +75,10 @@ $user = $db->get_user_by_id($_SESSION['user']['id']);
                             </a>
                             <div uk-dropdown="mode: click">
                                 <ul class="uk-nav uk-dropdown-nav">
-                                    <li><a href="up.php">My account</a></li>
-                                    <li><a href="ps.php">Change Password</a></li>
+                                    <li><a href="up.php" data-translate-key="myaccount">My account</a></li>
+                                    <li><a href="ps.php" data-translate-key="changepassword">Change Password</a></li>
                                     <li class="uk-nav-divider"></li>
-                                    <li><a href="function/logout.php">Log Out</a></li>
+                                    <li><a href="function/logout.php" data-translate-key="logout">Log Out</a></li>
                                 </ul>
                             </div>
                         </li>
