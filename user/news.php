@@ -143,7 +143,7 @@ if (isset($_GET['blog'])) {
 
                     <!-- end .widget-->
                     <section class="widget section-sidebar bg-light">
-                        <h3 class="widget-title bg-dark">categories</h3>
+                        <h3 class="widget-title bg-dark" data-translate-key="categories">categories</h3>
                         <div class="widget-content">
                             <div class="widget-inner">
                                 <ul class="widget-list list list-mark-4">

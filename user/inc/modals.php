@@ -140,7 +140,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : 'أرشيف الأخبار',
                 ourcommunities : 'مجتمعاتنا',
                 downloadnow : 'حمل الآن',
-
+                categories : 'التصنيفات',
 
             },
             english: {
@@ -188,7 +188,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : 'News Archive',
                 ourcommunities : 'Our Communities',
                 downloadnow : 'Download Now',
-                
+                categories : 'Categories',
                 
             },
             german: {
@@ -236,7 +236,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : 'Nachrichtenarchiv',
                 ourcommunities : 'Unsere Gemeinschaften',
                 downloadnow : 'Jetzt herunterladen',
-
+                categories : 'Kategorien',
 
             },
             china: {
@@ -284,7 +284,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : '新闻档案',
                 ourcommunities : '我们的社区',
                 downloadnow : '立即下载',
-
+                categories : '分类',
 
 
             },
@@ -333,7 +333,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : 'Archives des nouvelles',
                 ourcommunities : 'Nos communautés',
                 downloadnow : 'Télécharger maintenant',
-                
+                categories : 'Catégories',
 
             },
             india: {
@@ -381,7 +381,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 newsarchive : 'समाचार संग्रह',
                 ourcommunities : 'हमारी समुदाय',
                 downloadnow : 'अभी डाउनलोड करें',
-                
+                categories : 'श्रेणियाँ',
 
             },
         };
