@@ -30,14 +30,14 @@ include 'inc/navbar.php';
 
             <div class="uk-width-1-1">
                 <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">Update Account</h3>
+                    <h3 class="uk-card-title" data-translate-key="updateaccount">Update Account</h3>
                     <form class="uk-form-stacked" action="../function/up.php" method="post"
                         enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
 
                         <!-- image -->
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="img">Image</label>
+                            <label class="uk-form-label" for="img" data-translate-key="image">Image</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" hidden id="img" type="file" name="image"
                                     value="<?php echo $user['img'] ?>">
@@ -47,28 +47,28 @@ include 'inc/navbar.php';
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="useranme">User Name</label>
+                            <label class="uk-form-label" for="useranme" data-translate-key="username">User Name</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="useranme" type="text" name="name"
                                     value="<?php echo $user['name'] ?>">
                             </div>
                         </div>
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="nicname">Nick Name</label>
+                            <label class="uk-form-label" for="nicname" data-translate-key="nickname">Nick Name</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="nicname" type="text" name="nick"
                                     value="<?php echo $user['nick'] ?>">
                             </div>
                         </div>
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="email">Email</label>
+                            <label class="uk-form-label" for="email" data-translate-key="email">Email</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="email" type="email" name="email"
                                     value="<?php echo $user['email'] ?>">
                             </div>
                         </div>
                         <div class="uk-margin">
-                            <button class="uk-button uk-button-primary" type="submit">Update</button>
+                            <button class="uk-button uk-button-primary" type="submit" data-translate-key="update">Update</button>
                         </div>
                     </form>
                 </div>

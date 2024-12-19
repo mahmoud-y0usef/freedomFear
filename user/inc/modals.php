@@ -126,6 +126,12 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : 'الأسئلة والأجوبة الشائعة',
                 browse_all_articles : 'تصفح جميع المقالات',
                 noblogsfound : 'لم يتم العثور على مدونات.',
+                updateaccount : 'تحديث الحساب',
+                image : 'صورة',
+                username : 'اسم المستخدم',
+                nickname : 'اللقب',
+                email : 'البريد الإلكتروني',
+                update : 'تحديث',
 
             },
             english: {
@@ -159,6 +165,13 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : 'Popular Q&A',
                 browse_all_articles : 'Browse all articles',
                 noblogsfound : 'No blogs found.',
+                updateaccount : 'Update Account',
+                image : 'Image',
+                username : 'User Name',
+                nickname : 'Nick Name',
+                email : 'Email',
+                update : 'Update',  
+                
                 
             },
             german: {
@@ -192,6 +205,13 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : 'Beliebte Fragen und Antworten',
                 browse_all_articles : 'Alle Artikel durchsuchen',
                 noblogsfound : 'Keine Blogs gefunden.',
+                updateaccount :  'Konto aktualisieren',
+                image : 'Bild',
+                username : 'Benutzername',
+                nickname : 'Spitzname',
+                email : 'Email',
+                update : 'Aktualisieren',
+
             },
             china: {
                 welcome: '欢迎',
@@ -224,6 +244,12 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : '热门问答',
                 browse_all_articles : '浏览所有文章',
                 noblogsfound : '未找到博客。',
+                updateaccount : '更新帐户',
+                image : '图片',
+                username : '用户名',
+                nickname : '昵称',
+                email : '电子邮件',
+                update : '更新',
 
 
             },
@@ -258,6 +284,13 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : 'Questions et réponses populaires',
                 browse_all_articles : 'Parcourir tous les articles',
                 noblogsfound : 'Aucun blog trouvé.',
+                updateaccount : 'Mettre à jour le compte',
+                image : 'Image',
+                username : 'Nom d\'utilisateur',
+                nickname : 'Surnom',
+                email : 'Email',
+                update : 'Mettre à jour',
+
 
             },
             india: {
@@ -291,7 +324,12 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 popularqa : 'लोकप्रिय प्रश्न और उत्तर',
                 browse_all_articles : 'सभी लेख ब्राउज़ करें',
                 noblogsfound : 'कोई ब्लॉग नहीं मिला।',
-
+                updateaccount : 'खात अपडेट करें',
+                image : 'छवि',
+                username : 'उपयोगकर्ता नाम',
+                nickname : 'उपनाम',
+                email : 'ईमेल',
+                update : 'अपडेट',
 
             },
         };
@@ -308,8 +346,8 @@ $all_blog_for_help = $db->get_blog_by_category(1);
             });
         }
 
-        const currentLanguageElement = document.querySelector('.uk-subnav-lang a');
-        const languageDropdownItems = document.querySelectorAll('.uk-dropdown-nav a');
+        const currentLanguageElement = document.querySelector('.uk-subnav-lang .lan');
+        const languageDropdownItems = document.querySelectorAll('.uk-dropdown-nav .lan');
 
         function updateLanguageUI(language) {
             const selectedFlag = document.querySelector(`[data-lang="${language}"] img`);
