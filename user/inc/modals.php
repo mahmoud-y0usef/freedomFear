@@ -132,6 +132,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : 'اللقب',
                 email : 'البريد الإلكتروني',
                 update : 'تحديث',
+                updatepassword : 'تحديث كلمة المرور',
+                currentpassword : 'كلمة المرور الحالية',
+                newpassword : 'كلمة المرور الجديدة',
+                change : 'تغيير',
 
             },
             english: {
@@ -171,6 +175,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : 'Nick Name',
                 email : 'Email',
                 update : 'Update',  
+                updatepassword : 'Update Password',
+                currentpassword : 'Current Password',
+                newpassword : 'New Password',
+                change : 'Change',
+
                 
                 
             },
@@ -211,6 +220,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : 'Spitzname',
                 email : 'Email',
                 update : 'Aktualisieren',
+                updatepassword : 'Passwort aktualisieren',
+                currentpassword : 'Aktuelles Passwort',
+                newpassword : 'Neues Passwort',
+                change : 'Veränderung',
 
             },
             china: {
@@ -250,6 +263,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : '昵称',
                 email : '电子邮件',
                 update : '更新',
+                updatepassword : '更新密码',
+                currentpassword : '当前密码',
+                newpassword : '新密码',
+                change : '更改',
 
 
             },
@@ -290,7 +307,11 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : 'Surnom',
                 email : 'Email',
                 update : 'Mettre à jour',
-
+                updatepassword : 'Mettre à jour le mot de passe',
+                currentpassword : 'Mot de passe actuel',
+                newpassword : 'Nouveau mot de passe',
+                change : 'Changement',
+                
 
             },
             india: {
@@ -330,6 +351,10 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 nickname : 'उपनाम',
                 email : 'ईमेल',
                 update : 'अपडेट',
+                updatepassword : 'पासवर्ड अपडेट करें',
+                currentpassword : 'वर्तमान पासवर्ड',
+                newpassword : 'नया पासवर्ड',
+                change : 'परिवर्तन',
 
             },
         };
