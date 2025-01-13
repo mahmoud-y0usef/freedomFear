@@ -36,7 +36,7 @@ include 'inc/navbar.php';
                         <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="current_password" style="color:black;"  data-translate-key="currentpassword">Current Password</label>
+                            <label class="uk-form-label" style="color:black;" for="current_password"  data-translate-key="currentpassword">Current Password</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="current_password" required type="text" name="current_password"
                                     value="">

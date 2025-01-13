@@ -13,17 +13,24 @@ class DB
     public function login($username_or_email, $password, $table)
     {
         global $conn;
-        $sql = "SELECT * FROM $table WHERE (email = ? OR name = ?) AND password = ?";
+
+        // Prepare the query
+        $sql = "SELECT * FROM $table WHERE email = ? OR name = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        $hashed_password = md5($password);
-        mysqli_stmt_bind_param($stmt, 'sss', $username_or_email, $username_or_email, $hashed_password);
+        mysqli_stmt_bind_param($stmt, 'ss', $username_or_email, $username_or_email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $user = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);
-        return $user;
 
+        if ($user && password_verify($password, $user['password'])) {
+            // Password matches
+            return $user;
+        }
+
+        // Password or username/email doesn't match
+        return false;
     }
+
 
 
     public function get_user_by_email($email)
@@ -39,6 +46,32 @@ class DB
         return $user;
     }
 
+    public function get_admin_by_email($email)
+    {
+        global $conn;
+        $sql = "SELECT * FROM admins WHERE email = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $admin = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $admin;
+    }
+
+    public function get_admin_by_username($username)
+    {
+        global $conn;
+        $sql = "SELECT * FROM admins WHERE name = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $admin = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $admin;
+    }
+
     public function get_user_by_id($id)
     {
         global $conn;
@@ -50,6 +83,19 @@ class DB
         $user = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
         return $user;
+    }
+
+    public function get_admin_by_id($id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM admins WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $admin = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $admin;
     }
 
     public function get_user_by_username($username)
@@ -70,13 +116,28 @@ class DB
         global $conn;
         $sql = "UPDATE bl_game_users SET password = ? WHERE id = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, array(
+            'cost' => 10
+        ));
         mysqli_stmt_bind_param($stmt, 'si', $hashed_password, $id);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $result;
     }
-    
+    public function update_password_admin_by_id($id, $password)
+    {
+        global $conn;
+        $sql = "UPDATE admins SET password = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, array(
+            'cost' => 10
+        ));
+        mysqli_stmt_bind_param($stmt, 'si', $hashed_password, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
 
     public function update_user($id, $name, $nick, $email, $image)
     {
@@ -89,11 +150,38 @@ class DB
         return $result;
     }
 
+    public function update_admin($id, $name, $email, $image)
+    {
+
+        global $conn;
+        $sql = "UPDATE admins SET name = ?, email = ?, img = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sssi', $name, $email, $image, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
     public function check_user_exists($field, $value, $currentUserId)
     {
         // Prepare and execute SQL statement to check if another user has the same name or email
         global $conn;
         $sql = "SELECT COUNT(*) FROM bl_game_users WHERE $field = ? AND id != ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $value, $currentUserId);
+        $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
+
+        return $count > 0;
+    }
+
+    public function check_admin_exists($field, $value, $currentUserId)
+    {
+        // Prepare and execute SQL statement to check if another user has the same name or email
+        global $conn;
+        $sql = "SELECT COUNT(*) FROM admins WHERE $field = ? AND id != ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("si", $value, $currentUserId);
         $stmt->execute();
@@ -160,7 +248,9 @@ class DB
             return false;
         }
 
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, array(
+            'cost' => 10
+        ));
         mysqli_stmt_bind_param($stmt, 'ssss', $email, $username, $hashed_password, $activation);
         $result = mysqli_stmt_execute($stmt);
         if ($result === false) {
@@ -309,7 +399,9 @@ class DB
         global $conn;
         $sql = "UPDATE bl_game_users SET password = ? WHERE email = ?";
         $stmt = mysqli_prepare($conn, $sql);
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, array(
+            'cost' => 10
+        ));
         mysqli_stmt_bind_param($stmt, 'ss', $hashed_password, $email);
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
@@ -464,7 +556,7 @@ class DB
         return $charge;
     }
 
-    public function update_user_coins ($id , $newWalletValue)
+    public function update_user_coins($id, $newWalletValue)
     {
         global $conn;
         $sql = "UPDATE bl_game_users SET coins = ? WHERE id = ?";
@@ -558,7 +650,7 @@ class DB
         $sql = "SELECT * FROM blogs WHERE address LIKE ? OR description LIKE ? and status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         $search = '%' . $search . '%';
-        mysqli_stmt_bind_param($stmt, 'ss', $search , $search);
+        mysqli_stmt_bind_param($stmt, 'ss', $search, $search);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $blogs = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -589,7 +681,7 @@ class DB
         $sql = "SELECT * FROM streams WHERE status = 1";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
-            
+
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             $streams = mysqli_fetch_all($result, MYSQLI_ASSOC);

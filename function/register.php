@@ -65,6 +65,16 @@ if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['passwor
             exit;
         }
 
+        if($db->get_admin_by_email($email)){
+            echo "<script> window.location.href = '../register.php?error=This email already exists' </script>";
+            exit;
+        }
+
+        if($db->get_admin_by_username($username)){
+            echo "<script> window.location.href = '../register.php?error=Username already exists' </script>";
+            exit;
+        }
+
         // Register user and send email
         $result = $db->register($email, $username, $password);
         if ($result['registration_success']) {

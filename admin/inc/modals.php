@@ -1,97 +1,3 @@
-<?php
-$subjects = $db->select_subjects();
-$all_blog_for_help = $db->get_blog_by_category(1);
-?>
-
-<div class="uk-flex-top" id="modal-report" data-uk-modal>
-    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" data-uk-close></button>
-        <h2 class="uk-modal-title" data-translate-key="sendreport">Send Report</h2>
-        <form class="uk-form-stacked" action="../function/reports.php" method="post" enctype="multipart/form-data"
-            id="reportForm">
-            <div class="uk-margin">
-                <div class="uk-form-label" data-translate-key="subject">Subject</div>
-                <div class="uk-form-controls">
-                    <select name="sub" required class="js-select">
-                        <option value="" data-translate-key="selectsubject">Select Subject</option>
-                        <?php foreach ($subjects as $subject): ?>
-                            <option value="<?php echo $subject['id']; ?>"><?php echo $subject['name']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <div class="uk-margin">
-                <div class="uk-form-label" data-translate-key="details">Details</div>
-                <div class="uk-form-controls">
-                    <textarea data-translate-key="try_to_include_all_details" name="details" required class="uk-textarea"
-                        >Try to include all details...</textarea>
-                </div>
-                <div class="uk-form-controls uk-margin-small-top">
-                    <div data-uk-form-custom>
-                        <input name="file" required type="file">
-                        <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                            <i class="ico_attach-circle"></i><span data-translate-key="attachfile">Attach File</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="uk-margin">
-                <div class="uk-grid uk-flex-right fl-form-action" data-uk-grid>
-                    <div><button class="uk-button uk-button-small uk-button-link" type="button" data-translate-key="cancel">Cancel</button></div>
-                    <div><button class="uk-button uk-button-small uk-button-danger" type="submit" data-translate-key="submit">Submit</button></div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<div class="uk-flex-top" id="modal-help" data-uk-modal>
-    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-        <button class="uk-modal-close-default" type="button" data-uk-close></button>
-        <h2 class="uk-modal-title" data-translate-key="help">Help</h2>
-        <div class="search">
-            <div class="search__input">
-                <i class="ico_search"></i>
-                <input type="search" name="search" placeholder="Search">
-
-            </div>
-        </div>
-        <div class="uk-margin-small-left uk-margin-small-bottom uk-margin-medium-top">
-            <h4 data-translate-key="popularqa">Popular Q&A</h4>
-            <ul id="in_load">
-                <?php foreach ($all_blog_for_help as $blog): ?>
-                    <li><a href="blog.php?id=<?php echo $blog['id']; ?>"><?php echo $blog['address']; ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-            <ul>
-                <li><a href="news.php" data-translate-key="browse_all_articles">browse all articles</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // make search in help modal work 
-    $(document).ready(function () {
-        $('input[name="search"]').on('keyup', function () {
-            var search = $(this).val();
-            $.ajax({
-                url: '../function/search_help.php',
-                method: 'post',
-                data: { search: search },
-                success: function (data) {
-                    $('#in_load').html(data);
-                }
-            });
-        });
-    });
-
-</script>
-
-
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const translations = {
@@ -154,6 +60,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'الصينية',
                 India : 'الهندية',
                 French : 'الفرنسية',
+                admin_dashboard : 'لوحة التحكم',
 
             },
             english: {
@@ -215,6 +122,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'China',
                 India : 'India',
                 French : 'French',
+                admin_dashboard : 'Admin Dashboard',
                 
             },
             german: {
@@ -276,6 +184,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'Chinesisch',
                 India : 'Indisch',
                 French : 'Französisch',
+                admin_dashboard : 'Admin-Dashboard',
 
 
             },
@@ -338,6 +247,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : '中文',
                 India : '印地语',
                 French : '法语',
+                admin_dashboard : '管理仪表板',
 
 
             },
@@ -400,6 +310,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'Chinois',
                 India : 'Indien',
                 French : 'Français',
+                admin_dashboard : 'Tableau de bord administrateur',
 
             },
             india: {
@@ -461,6 +372,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'चीनी',
                 India : 'भारतीय',
                 French : 'फ्रांसीसी',
+                admin_dashboard : 'व्यवस्थापक डैशबोर्ड',
                 
             },
         };

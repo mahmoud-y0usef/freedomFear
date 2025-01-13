@@ -38,10 +38,7 @@ $streams = $db->get_streams();
             <h1 class="uk-page-heading-h" data-translate-key="ourstreams">Our Streams</h1>
         </div>
 
-        <!-- add stream button -->
-        <div class="uk-container uk-margin-top uk-margin-bottom" style="width:200px"> 
-            <a href="ads.php" class="uk-button uk-button-primary" data-translate-key="addstream">Add Stream</a>
-        </div>
+        
         <div data-uk-filter="target: .js-filter">
             <div class="fl-subnav">
                 <ul class=" uk-subnav uk-subnav-pill">

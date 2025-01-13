@@ -53,13 +53,7 @@ include 'inc/navbar.php';
                                     value="<?php echo $user['name'] ?>">
                             </div>
                         </div>
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="nicname" data-translate-key="nickname" style="color:black;">Nick Name</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="nicname" type="text" name="nick"
-                                    value="<?php echo $user['nick'] ?>">
-                            </div>
-                        </div>
+
                         <div class="uk-margin">
                             <label class="uk-form-label" for="email" data-translate-key="email" style="color:black;">Email</label>
                             <div class="uk-form-controls">
