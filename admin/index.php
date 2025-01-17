@@ -20,7 +20,7 @@ $last_blogs = $db->get_last_4_blogs();
 
         <?php
         if (isset($_GET['success'])) {
-            echo '<div class="uk-alert-success" data-uk-alert><a class="uk-alert-close" data-uk-close></a><p>' . $_GET['success'] . '</p></div>';
+            echo '<div class="uk-alert-success" data-uk-alert><a class="uk-alert-close" data-uk-close></a><p>' . filter_var($_GET['success'] , FILTER_SANITIZE_SPECIAL_CHARS) . '</p></div>';
         }
         ?>
 
@@ -164,16 +164,6 @@ $last_blogs = $db->get_last_4_blogs();
 
                 </div>
             </main>
-
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40525870-5"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag() { dataLayer.push(arguments); }
-                gtag('js', new Date());
-
-                gtag('config', 'UA-40525870-5');
-            </script>
 
     </main>
 

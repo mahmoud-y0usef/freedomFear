@@ -97,14 +97,14 @@ if ($emailVerification == 0) {
     <html>
     <body>
         To activate your account, please click on this link:<br>
-        <a href='https://freedom-fear.com/activate.php?/activate.php?email=$email&key=$activation' target='_blank'>Activate</a><br>
+        <a href='https://freedom-fear.com/activate.php?email=$email&key=$random_hash' target='_blank'>Activate</a><br>
         Your email: $email<br> 
         Your activation key: $random_hash
     </body>
     </html>";
 
     // Define the sender and recipient email addresses
-    $from = ADMIN_EMAIL;
+    $from = 'support@freedom-fear.com';
 
     // Create and send the email
     $mailer = new MailCreator();

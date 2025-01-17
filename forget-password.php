@@ -17,7 +17,7 @@ include 'inc/header.php';
             <div class="form-login">
                 <?php 
                 if(isset($_GET['error'])){
-                    echo '<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'.$_GET['error'].'</p></div>';
+                    echo '<div class="uk-alert-danger" uk-alert><a class="uk-alert-close" uk-close></a><p>'.filter_var($_GET['error'] , FILTER_SANITIZE_SPECIAL_CHARS).'</p></div>';
                 }
                 ?>
                 <div>

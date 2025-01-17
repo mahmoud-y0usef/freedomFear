@@ -150,6 +150,17 @@ class DB
         return $result;
     }
 
+    public function edit_user_admin($id , $name , $email , $nick , $active)
+    {
+        global $conn;
+        $sql = "UPDATE bl_game_users SET name = ? , email = ? , nick = ? , active = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sssii', $name, $email, $nick, $active, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
     public function update_admin($id, $name, $email, $image)
     {
 
@@ -393,6 +404,16 @@ class DB
         return $user;
     }
 
+    public function delete_user($id)
+    {
+        global $conn;
+        $sql = "DELETE FROM bl_game_users WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
 
     public function update_password($email, $password)
     {
@@ -701,6 +722,66 @@ class DB
         $result = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $result;
+    }
+
+
+    // admin panel
+    // users
+    public function get_users($page = 1, $limit = 10)
+    {
+        global $conn;
+
+        // Calculate the starting point for the LIMIT clause
+        $start = ($page - 1) * $limit;
+
+        // SQL query with LIMIT and OFFSET
+        $sql = "SELECT * FROM bl_game_users LIMIT ?, ?";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            // Bind parameters for LIMIT and OFFSET
+            mysqli_stmt_bind_param($stmt, "ii", $start, $limit);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            // Fetch results as an associative array
+            $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            mysqli_stmt_close($stmt);
+            return $users;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_total_users()
+    {
+        global $conn;
+
+        $sql = "SELECT COUNT(*) as total FROM bl_game_users";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return (int) $row['total'];
+        } else {
+            return 0;
+        }
+    }
+
+
+    public function search_users($search)
+    {
+        global $conn;
+        $sql = "SELECT * FROM bl_game_users WHERE name LIKE ? OR email LIKE ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $search = '%' . $search . '%';
+        mysqli_stmt_bind_param($stmt, 'ss', $search, $search);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_stmt_close($stmt);
+        return $users;
     }
 }
 ?>

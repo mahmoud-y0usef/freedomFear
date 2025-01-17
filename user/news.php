@@ -78,7 +78,7 @@ if (isset($_GET['blog'])) {
                         <?php if (empty($blog_category)): ?>
                             <div class="uk-alert uk-alert-warning" uk-alert>
                                 <a class="uk-alert-close" uk-close></a>
-                                <p>No news available</p>
+                                <p data-translate-key="no_news_available">No news available</p>
                             </div>
                         <?php endif; ?>
                         <?php foreach ($blog_category as $blog): ?>
@@ -105,7 +105,7 @@ if (isset($_GET['blog'])) {
                     <?php else: ?>
                         <?php if (empty($news)): ?>
                             <div class="uk-alert uk-alert-warning" uk-alert>
-                                <a class="uk-alert-close" uk-close></a>
+                                <a data-translate-key="no_news_available" class="uk-alert-close" uk-close></a>
                                 <p>No news available</p>
                             </div>
                         <?php endif; ?>

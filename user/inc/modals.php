@@ -154,6 +154,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'الصينية',
                 India : 'الهندية',
                 French : 'الفرنسية',
+                no_news_available : 'لا توجد أخبار متاحة',
 
             },
             english: {
@@ -215,6 +216,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'China',
                 India : 'India',
                 French : 'French',
+                no_news_available : 'No news available',
                 
             },
             german: {
@@ -276,7 +278,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'Chinesisch',
                 India : 'Indisch',
                 French : 'Französisch',
-
+                no_news_available : 'Keine Nachrichten verfügbar',
 
             },
             china: {
@@ -338,7 +340,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : '中文',
                 India : '印地语',
                 French : '法语',
-
+                no_news_available : '没有可用的新闻',
 
             },
             french: {
@@ -400,7 +402,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'Chinois',
                 India : 'Indien',
                 French : 'Français',
-
+                no_news_available : 'Aucune nouvelle disponible',
             },
             india: {
                 welcome: 'स्वागत है',
@@ -461,7 +463,7 @@ $all_blog_for_help = $db->get_blog_by_category(1);
                 China : 'चीनी',
                 India : 'भारतीय',
                 French : 'फ्रांसीसी',
-                
+                no_news_available : 'कोई समाचार उपलब्ध नहीं है',
             },
         };
 
