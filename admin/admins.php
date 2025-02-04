@@ -34,10 +34,10 @@ $users = $db->get_admin($page, $limit); // Fetch paginated users
                 <div class="uk-margin">
                     <div class="search__input"><i class="ico_search"></i><input type="search" name="search"
                             placeholder="Search">
-                            <button class="uk-button uk-button-primary" style="width:200px;" data-uk-toggle="target: #addUserModal"
-                        data-translate-key="add_admin">Add Admin</button>
                     </div>
-                    
+                    <button class="uk-button uk-button-primary" style="width:200px;"
+                        data-uk-toggle="target: #addUserModal" data-translate-key="add_admin">Add Admin</button>
+
                 </div>
 
                 <div class="uk-panel uk-panel-box uk-panel-box-secondary">
@@ -123,12 +123,12 @@ $users = $db->get_admin($page, $limit); // Fetch paginated users
                 <input class="uk-input" type="text" name="name" data-translate-key="username" placeholder="Username"
                     required>
             </div>
-           
+
             <div class="uk-margin">
                 <input class="uk-input" type="email" name="email" data-translate-key="email" placeholder="Email"
                     required>
             </div>
-        
+
             <button type="submit" class="uk-button uk-button-primary" data-translate-key="update">Save</button>
         </form>
     </div>
