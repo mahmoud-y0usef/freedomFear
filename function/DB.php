@@ -825,5 +825,29 @@ class DB
             return false;
         }
     }
+    public function delete_admin($id)
+    {
+        global $conn;
+        $sql = "DELETE FROM admins WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
+    public function search_admin($search)
+    {
+        global $conn;
+        $sql = "SELECT * FROM admin WHERE name LIKE ? OR email LIKE ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        $search = '%' . $search . '%';
+        mysqli_stmt_bind_param($stmt, 'ss', $search, $search);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_stmt_close($stmt);
+        return $users;
+    }
 }
 ?>

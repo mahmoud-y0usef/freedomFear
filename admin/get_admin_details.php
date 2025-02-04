@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new DB();
     $userId = (int)$_POST['id'];
 
-    // Fetch user details
+    
     $user = $db->get_admin_by_id($userId);
 
-    // Check if user exists
+    
     if ($user) {
         echo json_encode($user);
     } else {

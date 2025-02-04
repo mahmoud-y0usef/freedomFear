@@ -35,6 +35,7 @@ $users = $db->get_admin($page, $limit); // Fetch paginated users
                     <div class="search__input"><i class="ico_search"></i><input type="search" name="search"
                             placeholder="Search">
                     </div>
+                    <br><br>
                     <button class="uk-button uk-button-primary" style="width:200px;"
                         data-uk-toggle="target: #addUserModal" data-translate-key="add_admin">Add Admin</button>
 
