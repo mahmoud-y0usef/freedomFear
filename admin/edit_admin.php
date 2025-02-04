@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     require_once '../function/DB.php';
     $db = new DB();
-    $db->edit_admin_admin($id, $name, $email);
+    $db->update_admin_admin($id, $name, $email);
 
 }
 ?>

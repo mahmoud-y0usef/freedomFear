@@ -849,5 +849,27 @@ class DB
         mysqli_stmt_close($stmt);
         return $users;
     }
+
+    public function update_admin_admin($id, $name, $email)
+    {
+        global $conn;
+        $sql = "UPDATE admins SET name = ?, email = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ssi', $name, $email, $id);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
+
+    public function add_admin($name, $email, $password)
+    {
+        global $conn;
+        $sql = "INSERT INTO admins (name, email, password) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sss', $name, $email, $password);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
+    }
 }
 ?>
