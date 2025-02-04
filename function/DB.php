@@ -839,7 +839,7 @@ class DB
     public function search_admin($search)
     {
         global $conn;
-        $sql = "SELECT * FROM admin WHERE name LIKE ? OR email LIKE ?";
+        $sql = "SELECT * FROM admins WHERE name LIKE ? OR email LIKE ?";
         $stmt = mysqli_prepare($conn, $sql);
         $search = '%' . $search . '%';
         mysqli_stmt_bind_param($stmt, 'ss', $search, $search);
