@@ -18,7 +18,6 @@
             <li class="<?= $selected == 'charges' ? "uk-active" : '' ?>"><a href="charges.php"><i class="icon-ico fa-solid fa-bolt"></i><span data-translate-key="charges">Sharges</span></a></li>
             <li class="<?= $selected == 'communities' ? "uk-active" : '' ?>"><a href="communities.php"><i class="icon-ico fa-solid fa-satellite-dish"></i><span data-translate-key="communities">Communities</span></a></li>
             <li class="<?= $selected == 'events' ? "uk-active" : '' ?>"><a href="events.php"><i class="icon-ico fa-regular fa-calendar-days"></i><span data-translate-key="events">Events</span></a></li>
-            
         </ul>
     </div>
 </aside>

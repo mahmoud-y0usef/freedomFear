@@ -37,7 +37,7 @@ $users = $db->get_users($page, $limit); // Fetch paginated users
                 </div>
 
                 <div class="uk-panel uk-panel-box uk-panel-box-secondary">
-                    <h3 class="uk-panel-title">Users</h3>
+                    <h3 class="uk-panel-title" data-translate-key="users">Users</h3>
                     <table class="uk-table uk-table">
                         <thead>
                         <tr>

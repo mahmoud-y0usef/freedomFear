@@ -84,6 +84,9 @@
                 charges : 'الرسوم',
                 communities : 'المجتمعات',
                 events : 'الأحداث',
+                add_admin : 'إضافة مشرف',
+                edit_admin : 'تحرير المشرف',
+
 
             },
             english: {
@@ -169,7 +172,8 @@
                 charges : 'Charges',
                 communities : 'Communities',
                 events : 'Events',
-
+                add_admin : 'Add Admin',
+                edit_admin : 'Edit Admin',
             },
             german: {
                 welcome: 'Willkommen',
@@ -254,6 +258,8 @@
                 charges : 'Gebühren',
                 communities : 'Gemeinschaften',
                 events : 'Veranstaltungen',
+                add_admin : 'Admin hinzufügen',
+                edit_admin : 'Admin bearbeiten',
 
             },
             china: {
@@ -339,6 +345,8 @@
                 charges : '费用',
                 communities : '社区',
                 events : '活动',
+                add_admin : '添加管理员',
+                edit_admin : '编辑管理员',
             },
             french: {
                 welcome: 'Bienvenue',
@@ -423,6 +431,8 @@
                 charges : 'Frais',
                 communities : 'Communautés',
                 events : 'Événements',
+                add_admin : 'Ajouter un administrateur',
+                edit_admin : 'Modifier l\'administrateur',
             },
             india: {
                 welcome: 'स्वागत है',
@@ -507,6 +517,8 @@
                 charges : 'शुल्क',
                 communities : 'समुदाय',
                 events : 'घटनाएँ',
+                add_admin : 'व्यवस्थापक जोड़ें',
+                edit_admin : 'व्यवस्थापक संपादित करें',
             },
         };
 

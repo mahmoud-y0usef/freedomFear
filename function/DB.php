@@ -783,5 +783,47 @@ class DB
         mysqli_stmt_close($stmt);
         return $users;
     }
+
+    public function get_total_admin()
+    {
+        global $conn;
+
+        $sql = "SELECT COUNT(*) as total FROM admins";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return (int) $row['total'];
+        } else {
+            return 0;
+        }
+    }
+
+    public function get_admin($page , $limit)
+    {
+        global $conn;
+
+        // Calculate the starting point for the LIMIT clause
+        $start = ($page - 1) * $limit;
+
+        // SQL query with LIMIT and OFFSET
+        $sql = "SELECT * FROM admins LIMIT ?, ?";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            // Bind parameters for LIMIT and OFFSET
+            mysqli_stmt_bind_param($stmt, "ii", $start, $limit);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            // Fetch results as an associative array
+            $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            mysqli_stmt_close($stmt);
+            return $users;
+        } else {
+            return false;
+        }
+    }
 }
 ?>
